@@ -27,10 +27,20 @@
 
 #define LENGTH 30
 
+
 void rand_str(char *dest, size_t length) {
     char charset[] = "0123456789"
                      "abcdefghijklmnopqrstuvwxyz"
                      "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    for(int i=0; i<length;i++) {
+        size_t index = ((double) rand()) / RAND_MAX * (sizeof charset - 1);
+        dest[i] = charset[index];
+    }
+    dest[length] = '\0';
+}
+void rand_num(char *dest, size_t length) {
+    char charset[] = "0123456789";
 
     for(int i=0; i<length;i++) {
         size_t index = ((double) rand()) / RAND_MAX * (sizeof charset - 1);
@@ -44,14 +54,15 @@ int main(int argc, char **argv)
 	const char* const file  = "insertRandom.sql"    ;
 	FILE* f = fopen( file, "w");
 	FILE* fname = fopen("names","r");
+	FILE* femail = fopen("emails","r");
+	
 	
 	/*
 	 * USERS
 	 */
 	for(int i =0 ; i<30; i++){
 		char email[LENGTH+1];
-		rand_str(email,LENGTH);
-		email[LENGTH] = '\0';
+		fscanf(femail,"%s",email);
 		
 		char name[LENGTH+1];
 		fscanf(fname,"%s",name);
@@ -59,8 +70,8 @@ int main(int argc, char **argv)
 		
 		int phone = rand();
 		
-		char creditCard[LENGTH+1];
-		rand_str(creditCard,LENGTH);
+		char creditCard[15+1];
+		rand_num(creditCard,15);
 		creditCard[LENGTH] = '\0';
 
 		
@@ -81,6 +92,8 @@ int main(int argc, char **argv)
 	/*
 	 * CARS
 	 */
+	 
+	 
 	fclose(f);
 	return 0;
 }
