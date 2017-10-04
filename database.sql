@@ -20,6 +20,7 @@ CREATE TABLE ride(
 	origin VARCHAR(64) NOT NULL,
 	destination VARCHAR(64) NOT NULL,
 	price NUMERIC NOT NULL,
+	rideid VARCHAR(64) UNIQUE,
 	PRIMARY KEY(carid,time_stamp)
 );
 
@@ -27,8 +28,9 @@ CREATE TABLE ride(
 CREATE TABLE complete_ride(
 	client VARCHAR(64) REFERENCES person(email),
 	final_price NUMERIC NOT NULL,
-	carid VARCHAR(64),
-	time_stamp TIMESTAMP,
-	FOREIGN KEY(carid,time_stamp) REFERENCES ride(carid,time_stamp),
-	PRIMARY KEY(carid,time_stamp,client)
+	rideid VARCHAR(64) REFERENCES ride(rideid),
+	-- carid VARCHAR(64),
+	-- time_stamp TIMESTAMP,
+	-- FOREIGN KEY(carid,time_stamp) REFERENCES ride(carid,time_stamp),
+	PRIMARY KEY(rideid,client)
 );
