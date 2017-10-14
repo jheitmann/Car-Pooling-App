@@ -32,10 +32,11 @@
 	
 <!-- Navigation -->
 <nav class="w3-bar w3-black">
-  <a href="#home" class="w3-button w3-bar-item">Home</a>
-  <a href="Ride.php" class="w3-button w3-bar-item">Ride</a>
-  <a href="#tour" class="w3-button w3-bar-item">Login</a>
-  <a href="#tour" class="w3-button w3-bar-item">Sign In</a>
+  <a href="index.php" class="w3-button w3-bar-item">Home</a>
+  <a href="ride.php" class="w3-button w3-bar-item">Rides</a>
+  <a href="record.php" class="w3-button w3-bar-item">Past Rides</a>
+  <a href="newAccount.php" class="w3-button w3-bar-item">Create Account</a>
+  <a href="viewAccount.php" class="w3-button w3-bar-item">View Account</a>
 </nav>
 
 <!-- Slide Show -->
@@ -46,8 +47,8 @@
 
 <!-- Band Description -->
 <section class="w3-container w3-center w3-content" style="max-width:600px">
-  <h2 class="w3-wide">EASY RIDE</h2>
-  <p class="w3-opacity"><i>Every journey is a birthday party</i></p>
+  <h2 class="w3-wide">EASIERIDE</h2>
+  <p class="w3-opacity"><i>Every journey is a new friendship</i></p>
 </section>
 
 <script>

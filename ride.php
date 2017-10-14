@@ -1,28 +1,3 @@
-<?php
-/*
- * index.php
- * 
- * Copyright 2017 Unknown <loic@loic-ThinkPad-T450s>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- * 
- * 
- */
-
-?>
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -32,41 +7,45 @@
 	
 <!-- Navigation -->
 <nav class="w3-bar w3-black">
-  <a href="index.ph" class="w3-button w3-bar-item">Home</a>
-  <a href="#band" class="w3-button w3-bar-item">Ride</a>
-  <a href="#tour" class="w3-button w3-bar-item">Login</a>
-  <a href="#tour" class="w3-button w3-bar-item">Sign In</a>
+  <a href="index.php" class="w3-button w3-bar-item">Home</a>
+  <a href="ride.php" class="w3-button w3-bar-item">Rides</a>
+  <a href="record.php" class="w3-button w3-bar-item">Past Rides</a>
+  <a href="newAccount.php" class="w3-button w3-bar-item">Create Account</a>
+  <a href="viewAccount.php" class="w3-button w3-bar-item">View Account</a>
 </nav>
 
-<!-- Slide Show -->
-<section>
-  <!-- <img class="mySlides" src="img_car.jpg"
-  style="width:100%">-->
-</section>
+<?php
+  	// Connect to the database. Please change the password in the following line accordingly
+    
+    $db     = pg_connect("host=localhost port=5432 dbname=carpool user=application password=database2017");	
+    if(!$db){
+		print "<h2> ERROR: CANNOT ESTABLISH CONNECTION TO DATABASE </h2> ";
+		exit;
+	}
+	
+    $result = pg_query($db, "SELECT rideid FROM ride;");
+    if (!$result) {
+		echo "<h2>An error occurred.</h2>";
+		exit;
+	}
+    /*
+    while($row    = pg_fetch_assoc($result)){
+		echo " <section>
+				<svg width='1000' height='300'>
+					<rect x='20' y='20' rx='20' ry='20' width='900' height='300'
+					  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
+					<text x='80' y='70' font-family='Verdana' font-size='20' fill='blue'> $row['rideid'] </text>
+					 
+					Sorry, your browser does not support inline SVG.
+				</svg>
+			</section>
+		
+		";
+	}
+    */
+    ?> 
 
-<!-- Band Description -->
-<section class="w3-container w3-center w3-content" style="max-width:600px">
-  <h2 class="w3-wide">These are the available rides</h2>
-  <!--<p class="w3-opacity"><i>Every journey is </i></p> -->
-</section>
-
-<script>
-// Automatic Slideshow - change image every 3 seconds
-var myIndex = 0;
-carousel();
-
-function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";
-    }
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}
-    x[myIndex-1].style.display = "block";
-    setTimeout(carousel, 3000);
-}
-</script>
-
+	
 </body>
+
 </html>
