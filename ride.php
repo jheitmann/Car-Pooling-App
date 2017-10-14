@@ -32,22 +32,22 @@
 	
 <!-- Navigation -->
 <nav class="w3-bar w3-black">
-  <a href="#home" class="w3-button w3-bar-item">Home</a>
-  <a href="Ride.php" class="w3-button w3-bar-item">Ride</a>
+  <a href="index.ph" class="w3-button w3-bar-item">Home</a>
+  <a href="#band" class="w3-button w3-bar-item">Ride</a>
   <a href="#tour" class="w3-button w3-bar-item">Login</a>
   <a href="#tour" class="w3-button w3-bar-item">Sign In</a>
 </nav>
 
 <!-- Slide Show -->
 <section>
-  <img class="mySlides" src="img_car.jpg"
-  style="width:100%">
+  <!-- <img class="mySlides" src="img_car.jpg"
+  style="width:100%">-->
 </section>
 
 <!-- Band Description -->
 <section class="w3-container w3-center w3-content" style="max-width:600px">
-  <h2 class="w3-wide">EASY RIDE</h2>
-  <p class="w3-opacity"><i>Every journey is a birthday party</i></p>
+  <h2 class="w3-wide">These are the available rides</h2>
+  <!--<p class="w3-opacity"><i>Every journey is </i></p> -->
 </section>
 
 <script>
