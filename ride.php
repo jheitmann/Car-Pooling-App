@@ -46,13 +46,26 @@
 	}
 	echo "</select><input type='submit' name='submit' /></form>";
 	
+	?>
+	<p>
+		<form name="sort" action='ride.php' method='POST'>
+			Sort by
+		<select name="order">
+			<option value="time_stamp" selected>Date</option>
+			<option value="price">Price</option>
+		</select>
+		<input type='submit' name='submit' />
+	</form>
+	</p>
 	
+	
+	<?php
 	
     $result = pg_query($db, "SELECT * FROM ride r 
 		where r.rideid NOT IN (Select c.rideid from complete_ride c)
 		AND r.origin LIKE '%".$_POST[origin]."%'
 		AND r.destination LIKE '%".$_POST[destination]."%'
-		ORDER BY time_stamp");
+		ORDER BY ".( isset($_POST[order])? $_POST[order] :"time_stamp"));
 		
     if (!$result) {
 		echo "<h2>An error occurred.</h2>";

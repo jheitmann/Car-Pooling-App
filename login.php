@@ -11,7 +11,7 @@
 			if(strcmp($pass,$row["password"])==0){
 			  $_SESSION['email'] = $row['email'];
 			  require("db_close.php");        
-			  header("Location: http://localhost:8080/app/index.php");
+			  header("Location: index.php");
 			  exit;
 			}
 		}
