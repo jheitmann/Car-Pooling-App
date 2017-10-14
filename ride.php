@@ -25,7 +25,7 @@
 	
 	echo "<form name='update' action='ride.php' method='POST' >";
 	$locations = pg_query($db, "SELECT DISTINCT origin FROM ride");
-	echo "From : <select name='origin'><option value=''>Select...</option>";
+	echo "Departure : <select name='origin'><option value=''>Select...</option>";
 	while($choices = pg_fetch_assoc($locations)){
 		echo "<option value='".$choices['origin']."' ";
 		if(isset($_POST[origin]) && $_POST[origin] == $choices['origin']){
@@ -36,7 +36,7 @@
 	echo "</select>";
 	
 	$locations = pg_query($db, "SELECT DISTINCT  destination FROM ride");
-	echo "To : <select name='destination'><option value=''>Select...</option>";
+	echo "Destination : <select name='destination'><option value=''>Select...</option>";
 	while($choices = pg_fetch_assoc($locations)){
 		echo "<option value='".$choices['destination']."' ";
 		if(isset($_POST[destination]) && $_POST[destination] == $choices['destination']){
