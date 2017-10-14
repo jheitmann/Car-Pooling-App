@@ -23,7 +23,10 @@
 		exit;
 	}
 	
-    $result = pg_query($db, "SELECT rideid FROM ride");
+    $result = pg_query($db, "SELECT * FROM ride r 
+		where r.rideid NOT IN (Select c.rideid from complete_ride c)
+		ORDER BY time_stamp");
+		
     if (!$result) {
 		echo "<h2>An error occurred.</h2>";
 		exit;
@@ -33,8 +36,10 @@
 				<svg width='1000' height='300'>
 					<rect x='20' y='20' rx='20' ry='20' width='900' height='200'
 					  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-					<text x='80' y='70' font-family='Verdana' font-size='20' fill='blue'> ".$row['rideid']." </text>
-					 
+					<text x='80' y='70' font-family='Verdana' font-size='30' fill='blue'> ID : ".$row['rideid']." </text>
+					<text x='80' y='110' font-family='Verdana' font-size='20' fill='black'> From : ".$row['origin']." </text>
+					<text x='80' y='140' font-family='Verdana' font-size='20' fill='black'> To : ".$row['destination']." </text>
+					<text x='600' y='170' font-family='Verdana' font-size='20' fill='black'> Price : ".$row['price']." dollards </text>
 					Sorry, your browser does not support inline SVG.
 				</svg>
 			</section>
