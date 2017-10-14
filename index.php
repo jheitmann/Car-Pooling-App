@@ -33,7 +33,7 @@
 <!-- Navigation -->
 <nav class="w3-bar w3-black">
   <a href="#home" class="w3-button w3-bar-item">Home</a>
-  <a href="Ride.php" class="w3-button w3-bar-item">Ride</a>
+  <a href="ride.php" class="w3-button w3-bar-item">Ride</a>
   <a href="#tour" class="w3-button w3-bar-item">Login</a>
   <a href="#tour" class="w3-button w3-bar-item">Sign In</a>
 </nav>

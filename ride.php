@@ -21,6 +21,30 @@
  * 
  * 
  */
+$conn_string = "host=localhost port=5432 dbname=carpool user=application password=database2017";
+$conn = pg_connect($conn_string);
+
+if (!$conn) {
+  echo "Error: No connection\n";
+  exit;
+}
+
+$result = pg_query($conn, "SELECT * FROM ride");
+if (!$result) {
+  echo "Error. Query \n";
+  exit;
+}
+
+$data = "";
+while ($row = pg_fetch_row($result)) {
+    $data .= "<tr>
+                <td>" . $row[0] . "</td>
+                <td>" . $row[2] . "</td>
+                <td>" . $row[3] . "</td>
+                <td>" . $row[4] . "</td>
+              </tr>";
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -32,8 +56,8 @@
 	
 <!-- Navigation -->
 <nav class="w3-bar w3-black">
-  <a href="index.ph" class="w3-button w3-bar-item">Home</a>
-  <a href="#band" class="w3-button w3-bar-item">Ride</a>
+  <a href="index.php" class="w3-button w3-bar-item">Home</a>
+  <a href="ride.php" class="w3-button w3-bar-item">Ride</a>
   <a href="#tour" class="w3-button w3-bar-item">Login</a>
   <a href="#tour" class="w3-button w3-bar-item">Sign In</a>
 </nav>
@@ -49,6 +73,10 @@
   <h2 class="w3-wide">These are the available rides</h2>
   <!--<p class="w3-opacity"><i>Every journey is </i></p> -->
 </section>
+
+<form>
+    <?= $data ?>
+</form> 
 
 <script>
 // Automatic Slideshow - change image every 3 seconds
