@@ -17,7 +17,7 @@
 <?php
   	// Connect to the database. Please change the password in the following line accordingly
     
-    $db     = pg_connect("host=localhost port=5432 dbname=carpool user=postgres password=Camcam5647");	
+    $db     = pg_connect("host=localhost port=5432 dbname=carpool user=application password=database2017");	
     if(!$db){
 		print "<h2> ERROR: CANNOT ESTABLISH CONNECTION TO DATABASE </h2> ";
 		exit;
