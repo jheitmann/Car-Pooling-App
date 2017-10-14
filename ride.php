@@ -17,7 +17,7 @@
 <?php
   	// Connect to the database. Please change the password in the following line accordingly
     
-    $db     = pg_connect("host=localhost port=5432 dbname=carpool user=application password=database2017");	
+    $db     = pg_connect("host=localhost port=5432 dbname=carpool user=postgres password=Camcam5647");	
     if(!$db){
 		print "<h2> ERROR: CANNOT ESTABLISH CONNECTION TO DATABASE </h2> ";
 		exit;
@@ -31,9 +31,9 @@
     while($row    = pg_fetch_assoc($result)){
 		echo " <section>
 				<svg width='1000' height='300'>
-					<rect x='20' y='20' rx='20' ry='20' width='900' height='300'
+					<rect x='20' y='20' rx='20' ry='20' width='900' height='200'
 					  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-					<text x='80' y='70' font-family='Verdana' font-size='20' fill='blue'> "+$row['rideid']+" </text>
+					<text x='80' y='70' font-family='Verdana' font-size='20' fill='blue'> ".$row['rideid']." </text>
 					 
 					Sorry, your browser does not support inline SVG.
 				</svg>
