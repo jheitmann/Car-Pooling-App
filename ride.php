@@ -23,18 +23,17 @@
 		exit;
 	}
 	
-    $result = pg_query($db, "SELECT rideid FROM ride;");
+    $result = pg_query($db, "SELECT rideid FROM ride");
     if (!$result) {
 		echo "<h2>An error occurred.</h2>";
 		exit;
 	}
-    /*
     while($row    = pg_fetch_assoc($result)){
 		echo " <section>
 				<svg width='1000' height='300'>
 					<rect x='20' y='20' rx='20' ry='20' width='900' height='300'
 					  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-					<text x='80' y='70' font-family='Verdana' font-size='20' fill='blue'> $row['rideid'] </text>
+					<text x='80' y='70' font-family='Verdana' font-size='20' fill='blue'> "+$row['rideid']+" </text>
 					 
 					Sorry, your browser does not support inline SVG.
 				</svg>
@@ -42,7 +41,6 @@
 		
 		";
 	}
-    */
     ?> 
 
 	
