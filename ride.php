@@ -1,3 +1,12 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['email'])){
+    header("Location: login.php");
+    exit;
+  }
+  ?>
+
+
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -10,15 +19,10 @@
 
 <?php
   	// Connect to the database. Please change the password in the following line accordingly
-    
-    $db     = pg_connect("host=localhost port=5432 dbname=carpool user=application password=database2017");	
-    if(!$db){
-		print "<h2> ERROR: CANNOT ESTABLISH CONNECTION TO DATABASE </h2> ";
-		exit;
-	}
-	
-	echo "<form name='update' action='ride.php' method='POST' >";
-	$locations = pg_query($db, "SELECT DISTINCT origin FROM ride");
+    require("db_connect.php");?>
+	<form name='update' action='ride.php' method='POST' >
+	<?php
+	$locations = pg_query($con, "SELECT DISTINCT origin FROM ride");
 	echo "Departure : <select name='origin'><option value=''>Select...</option>";
 	while($choices = pg_fetch_assoc($locations)){
 		echo "<option value='".$choices['origin']."' ";
@@ -29,7 +33,7 @@
 	}
 	echo "</select>";
 	
-	$locations = pg_query($db, "SELECT DISTINCT  destination FROM ride");
+	$locations = pg_query($con, "SELECT DISTINCT  destination FROM ride");
 	echo "Destination : <select name='destination'><option value=''>Select...</option>";
 	while($choices = pg_fetch_assoc($locations)){
 		echo "<option value='".$choices['destination']."' ";
@@ -38,24 +42,23 @@
 		}
 		echo">".$choices['destination']."</option>";
 	}
-	echo "</select><input type='submit' name='submit' /></form>";
+	echo "</select>";
 	
 	?>
 	<p>
-		<form name="sort" action='ride.php' method='POST'>
 			Sort by
 		<select name="order">
-			<option value="time_stamp" selected>Date</option>
+			<option value="time_stamp">Date</option>
 			<option value="price">Price</option>
 		</select>
 		<input type='submit' name='submit' />
-	</form>
-	</p>
+	</p></form>
 	
 	
+	<!-- QUERY AND PRINT RESULT -->
 	<?php
 	
-    $result = pg_query($db, "SELECT * FROM ride r 
+    $result = pg_query($con, "SELECT * FROM ride r 
 		where r.rideid NOT IN (Select c.rideid from complete_ride c)
 		AND r.origin LIKE '%".$_POST[origin]."%'
 		AND r.destination LIKE '%".$_POST[destination]."%'
@@ -81,6 +84,8 @@
 		
 		";
 	}
+	
+	require("db_close.php");
     ?> 
 
 	
