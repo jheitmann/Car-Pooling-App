@@ -1,16 +1,20 @@
 Attack Plan:
 
-- figure out how to connect to the database and display a whole table
-- Figure out how to update a table (add new row)
+SQL:
+TABLE bid(): rideID, ClientID, bid. Stores All the the bids!! Ever!!!
+
+TABLE ride(): boolean attribute ACCEPTED, attribute currentHighest with userID.
 
 
+PHP:
 - Create the following pages:
 
 index.php
 	Just a home page.
 
 ride.php
-	Page that calls the database and displays all the rides.
+	Page that calls the database and displays all the available rides.
+		(Add an boolean attribute to the ride table that says completed or
 	Have some options to sort.
 
 	You can click on each ride.
@@ -19,9 +23,11 @@ ride.php
 
 particularride.php
 	Simple page, displays the full information of a particular ride.
+
+	You can see the current ”highest bid” on each ride and choose to up it.
 	
 completedRides.php
-	displays all the ”completed rides” where the use email is found.
+	displays all the ”completed rides” where the user email is found.
 
 myRides.php
 	Checks with the sessionEmail.
@@ -61,6 +67,9 @@ registerpage.php
 
 adminPage.php
 	where admins can login in. Or only admins can access.
+
+	Displays all 4 pages.
+	Options to fuck them up however the admin desires.
 
 
 	
