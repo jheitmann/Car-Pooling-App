@@ -24,13 +24,21 @@ CREATE TABLE ride(
 	PRIMARY KEY(carid,time_stamp)
 );
 
-
-CREATE TABLE complete_ride(
+CREATE TABLE bid(
 	client VARCHAR(64) REFERENCES person(email),
-	final_price NUMERIC NOT NULL,
+	bid_price NUMERIC NOT NULL,
 	rideid VARCHAR(64) REFERENCES ride(rideid),
 	-- carid VARCHAR(64),
 	-- time_stamp TIMESTAMP,
 	-- FOREIGN KEY(carid,time_stamp) REFERENCES ride(carid,time_stamp),
 	PRIMARY KEY(rideid,client)
+);
+
+CREATE TABLE complete_ride(
+	client VARCHAR(64) REFERENCES person(email),
+	final_price NUMERIC NOT NULL,
+	rideid VARCHAR(64) REFERENCES ride(rideid) PRIMARY KEY
+	-- carid VARCHAR(64),
+	-- time_stamp TIMESTAMP,
+	-- FOREIGN KEY(carid,time_stamp) REFERENCES ride(carid,time_stamp),
 );
