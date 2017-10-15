@@ -9,62 +9,74 @@ TABLE completed_ride(): rideID, clientID, final_price
 PHP:
 - Create the following pages:
 
-index.php
-	Just a home page.
-
-ride.php
-	Page that calls the database and displays all the available rides.
-		(All rides that are not in TABLE COMPLETED RIDES)
-
-	You can click on each ride.
+1) Common for driver and client:
 	
-	You can see the current ”highest bid” on each ride and choose to up it.
+	db_connect.php
+		Connects to database and the variable is "$con"
 
-particularride.php
-	Simple page, displays the full information of a particular ride.
+	db_close.php
+		Closes connection and sets $con to NULL
 
-	You can see the current ”highest bid” on each ride and choose to up it.
+	index.php
+		Just a home page.
 	
-completedRides.php
-	displays all the ”completed rides” where the user email is found.
+	login.php
+		uses "loginpage.php" as help
+		if login is successful
+		starts a session and sets a session variable - the email.
+		In all following pages we check if the session variable is set.
 
-myBids.php
-	Compare the bids I did with the highest bid for the rides. (Can change my bid)
+	register.php
+		uses "registerpage.php" as help
+		Takes credentials and creates a new person in database. 
+		Throws an error if it’s already there.
 
-myRides.php
-	Checks with the sessionEmail.
+2) For Client:
+
+	ride.php
+		Page that calls the database and displays all the available rides.
+			(All rides that are not in TABLE completed_rides)
+
+		You can click on any ride to get details of it ("particularride.php")
+		
+		You can see the current ”highest bid” on each ride and choose to up it.
+
+	particularride.php
+		Simple page, displays the full information of a particular ride.
+
+		You can see the current ”highest bid” on each ride and choose to up it.
 	
-	Displays all rides where this user is set as the ”driver”. 	
-	There he can see the highest current bid on his drive.
-	There he can choose to ”accept” or ”lock in” that ride.
-		-Which will add the ride with its current price to ”completed rides”.
+	completedRides.php
+		displays all the ”completed rides” for a given client.
+		NOTE: Completed here means all booked rides.
+
+	myBids.php
+		Compare the bids I did with the highest bid for the rides. (Can change my bid)
+
+3) For Driver:
 	
-	(We only keep track of the highest bid and the user that put the highest bid)
+	addcar.php
+		--Not sure if it will be different page or not
+		Form which takes all car details and add in database.
 
-createRide.php
-	User can create a ride with him as a driver and set information, car etc…
-	Then he sets a starting price on his ride.
+	myRides.php
+		Checks with the sessionEmail.
+		Displays all rides where this user is set as the ”driver”. 	
+		There he can see the highest current bid on his drive.
+		There he can choose to ”accept” or ”lock in” that ride.
+			-Which will add the ride with its current price to ”completed rides”.
+		
+		(We only keep track of the highest bid and the user that put the highest bid)
 
-	(adding a new entry to the ride Table, with client being null, and a min-price that the creator sets.)
+	createRide.php
+		User can create a ride with him as a driver and set information, car etc…
+		Then he sets a starting price on his ride.
+
+		(adding a new entry to the ride Table, with client being null, and a min-price that the creator sets.)
 
 
-db_close.php
-	Lines that are uses many times.
 
-db_connect.php
-	Lines that are uses many times.
 
-loginpage.php
-	if login is successful
-	starts a session and sets a session variable - the email.
-	In all following pages we check if the session variable is set.
-
-register.php
-	Is called by the registerpage.php
-
-registerpage.php
-	Adds new user to the database.
-	Throws an error if it’s already there.
 	
 
 adminPage.php
