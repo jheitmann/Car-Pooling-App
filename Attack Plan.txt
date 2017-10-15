@@ -7,36 +7,60 @@ Attack Plan:
 - Create the following pages:
 
 index.php
-	login page
-	Option to create new account (user).
+	Just a home page.
 
 ride.php
-	Create a ride.php so it displays whole ride table.
-	Make a login in page so you can create your own USER:
+	Page that calls the database and displays all the rides.
+	Have some options to sort.
 
-	Display all rides.
-	Button: SIGN UP FOR RIDE
+	You can click on each ride.
+	
+	You can see the current ”highest bid” on each ride and choose to up it.
 
-	-Sign up to a ride with your email:
-		if email is not in the USER table:
-			Error - ”You need to create an account.
-			
-	Update COMPLETED RIDES with the RIDE (rideID (car&date)) and the USER
-	-If the rideID already exists in COMPLETED RIDES:
-		-Add USER/CLIENT to that rideID(car&date) in COMPLETED RIDES
-	-Else:
-		-Create a new row in COMPLETED RIDES with USER and RIDE (rideID(car&date))
+particularride.php
+	Simple page, displays the full information of a particular ride.
+	
+completedRides.php
+	displays all the ”completed rides” where the use email is found.
+
+myRides.php
+	Checks with the sessionEmail.
+	
+	Displays all rides where this user is set as the ”driver”. 	
+	There he can see the highest current bid on his drive.
+	There he can choose to ”accept” or ”lock in” that ride.
+		-Which will add the ride with its current price to ”completed rides”.
+	
+	(We only keep track of the highest bid and the user that put the highest bid)
+
+createRide.php
+	User can create a ride with him as a driver and set information, car etc…
+	Then he sets a starting price on his ride.
+
+	(adding a new entry to the ride Table, with client being null, and a min-price that the creator sets.)
 
 
-createAccount.php
+db_close.php
+	Lines that are uses many times.
 
-	Just a form to create new user and update the database
+db_connect.php
+	Lines that are uses many times.
 
-	-If the userID(email) is new:
-		-update USER-table with new USER row
-	-Else (if the email is already in the user table):
-		- Error ”You already have an account, sign up to a ride with your email”
+loginpage.php
+	if login is successful
+	starts a session and sets a session variable - the email.
+	In all following pages we check if the session variable is set.
+
+register.php
+	Is called by the registerpage.php
+
+registerpage.php
+	Adds new user to the database.
+	Throws an error if it’s already there.
+	
+
+adminPage.php
+	where admins can login in. Or only admins can access.
 
 
-info.php
-?
+	
