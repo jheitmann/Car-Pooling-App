@@ -37,13 +37,7 @@
 <body>
 	
 <!-- Navigation -->
-<nav class="w3-bar w3-black">
-  <a href="index.php" class="w3-button w3-bar-item">Home</a>
-  <a href="ride.php" class="w3-button w3-bar-item">Rides</a>
-  <a href="record.php" class="w3-button w3-bar-item">Past Rides</a>
-  <a href="newAccount.php" class="w3-button w3-bar-item">Create Account</a>
-  <a href="viewAccount.php" class="w3-button w3-bar-item">View Account</a>
-</nav>
+<?php require('header.html'); ?>
 
 <!-- Slide Show -->
 <section>
