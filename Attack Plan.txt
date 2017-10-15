@@ -28,6 +28,9 @@ particularride.php
 completedRides.php
 	displays all the ”completed rides” where the user email is found.
 
+myBids.php
+	Compare the bids I did with the highest bid for the rides. (Can change my bid)
+
 myRides.php
 	Checks with the sessionEmail.
 	
