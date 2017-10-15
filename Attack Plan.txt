@@ -3,7 +3,7 @@ Attack Plan:
 SQL:
 TABLE bid(): rideID, ClientID, bid. Stores All the the bids!! Ever!!!
 
-TABLE ride(): boolean attribute ACCEPTED, attribute currentHighest with userID.
+TABLE completed_ride(): rideID, clientID, final_price
 
 
 PHP:
@@ -14,8 +14,7 @@ index.php
 
 ride.php
 	Page that calls the database and displays all the available rides.
-		(Add an boolean attribute to the ride table that says completed or
-	Have some options to sort.
+		(All rides that are not in TABLE COMPLETED RIDES)
 
 	You can click on each ride.
 	
