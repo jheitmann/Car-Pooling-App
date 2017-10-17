@@ -4,45 +4,73 @@
     header("Location: login.php");
     exit;
   }
+  ?>
 
-?>
 
 <!DOCTYPE html>
-<head>
-<title>Insert data to PostgreSQL with php - creating a simple web application</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="w3.css">
-<style>
-li {
-list-style: none;
-}
-</style>
-</head>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="w3.css">
 <body>
-	<?php require('header.html'); require("db_connect.php");?>
+	
+<!-- Navigation -->
+<?php require('header.html'); ?>
 
-	<h2>Enter data into book table</h2>
-	<ul>
-		<form name="insert" action="offerRide.php" method="POST" >
-			<li>Car ID:</li><li><input type="text" name="carid" /></li>
-			<li>time_stamp:</li><li><input type="text" name="time_stamp" /></li>
-			<li>origin:</li><li><input type="text" name="origin" /></li>
-			<li>destination:</li><li><input type="text" name="destination" /></li>
-			<li>price:</li><li><input type="text" name="price" /></li>
-			<li>rideid:</li><li><input type="text" name="rideid" /></li>
-			<li><input type="submit" /></li>
-		</form>
-	</ul>
-</body>
-</html>
 <?php
-#$db = pg_connect("host=localhost port=5432 dbname=carpool user=application password=database2017");
-$query = "INSERT INTO ride VALUES ('$_POST[carid]',$_POST[time_stamp]','$_POST[origin]',
-'$_POST[destination]','$_POST[price]','$_POST[rideid]'
-)";
-#$result = pg_query($query);
-pg_query($con, $query);
+  	// Connect to the database. Please change the password in the following line accordingly
+    require("db_connect.php");?>
+	<form name='update' action='offerRide.php' method='POST' >
+	<p></p>
+	<?php
+	$cars = pg_query($con, "SELECT car.carid FROM car WHERE car.owner = '" . $_SESSION['email'] . "'");
+	if (pg_num_rows($cars) == 0) { 
+		echo " <section>
+			<svg width='1000' height='100'>
+				<rect x='20' y='20' rx='20' ry='20' width='900' height='80'
+				  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
+				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> You need to add a car to your profile first. </text>
+				Sorry, your browser does not support inline SVG.
+			</svg>
+		</section>
+		
+		";
+	} 
+	echo "<form action='offerRide.php'> Car : <select name='carid'><option value=''>Select...</option>";
+	while($choices = pg_fetch_assoc($cars)) { 
+		echo "<option value='".$choices['carid']."' ";
+		echo">".$choices['carid']."</option>";
+	} 
+	echo "</select><br>";
+	
+	?>
+		Origin:
+		<input type="text" name="origin" value="Kent Ridge"><br>
+		Destination:
+		<input type="text" name="destination" value="Marina Bay"><br>
+		Minimum Price:
+		<input type="number" name="min" value="0"><br>
+		Datetime:
+		<input type="text" name="datetime" value="2017-10-23 16:00:00 GMT"><br><br>
+		<input type="submit" value="Submit">
+	</form> 
+	
+	<p></p>
+	
+	<?php
+	if(isset($_POST['carid']) && isset($_POST['datetime']) && isset($_POST['origin']) && isset($_POST['destination']) && isset($_POST['min'])) {
+		$insert = "INSERT INTO ride VALUES('".$_POST["carid"]."', '".$_POST["datetime"]."', '".$_POST["origin"]."', '".
+                  $_POST["destination"]."', ".$_POST["min"].".00, 'ride500')";
+        $insert_return = pg_query($con, $insert);
+        if(!$result){
+          echo "Error";
+        }
+	}
+	
+	require("db_close.php");
+	?>
 
-require("db_close.php");
-?>
+	
+</body>
+
+</html>
