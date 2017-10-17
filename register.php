@@ -22,7 +22,7 @@
         else{
           $_SESSION['email'] = $_POST["email"];
           require("db_close.php");        
-          header("Location: http://localhost:8080/app/login.php");
+          header("Location: login.php");
           exit;
         }
       }
