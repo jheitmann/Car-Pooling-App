@@ -75,10 +75,6 @@ PHP:
 		(adding a new entry to the ride Table, with client being null, and a min-price that the creator sets.)
 
 
-
-
-	
-
 adminPage.php
 	where admins can login in. Or only admins can access.
 
