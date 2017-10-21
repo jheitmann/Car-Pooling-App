@@ -18,11 +18,9 @@
 <?php require('header.html'); ?>
 
 <?php
-  	// Connect to the database. Please change the password in the following line accordingly
-    require("db_connect.php");?>
-	<form name='update' action='offerRide.php' method='POST' >
-	<p></p>
-	<?php
+    require("db_connect.php");
+    echo "<p></p>";
+
 	$cars = pg_query($con, "SELECT car.carid FROM car WHERE car.owner = '" . $_SESSION['email'] . "'");
 	if (pg_num_rows($cars) == 0) { 
 		echo " <section>
@@ -36,14 +34,15 @@
 		
 		";
 	} 
-	echo "<form action='offerRide.php'> Car : <select name='carid'><option value=''>Select...</option>";
+	
+	echo "<form name = update action='insertRide.php' method = 'POST'> Car : <select name='carid'><option value=''>Select...</option>";
 	while($choices = pg_fetch_assoc($cars)) { 
 		echo "<option value='".$choices['carid']."' ";
 		echo">".$choices['carid']."</option>";
 	} 
 	echo "</select><br>";
 	
-	?>
+?>
 		Origin:
 		<input type="text" name="origin" value="Kent Ridge"><br>
 		Destination:
@@ -57,18 +56,9 @@
 	
 	<p></p>
 	
-	<?php
-	if(isset($_POST['carid']) && isset($_POST['datetime']) && isset($_POST['origin']) && isset($_POST['destination']) && isset($_POST['min'])) {
-		$insert = "INSERT INTO ride VALUES('".$_POST["carid"]."', '".$_POST["datetime"]."', '".$_POST["origin"]."', '".
-                  $_POST["destination"]."', ".$_POST["min"].".00, 'ride500')";
-        $insert_return = pg_query($con, $insert);
-        if(!$result){
-          echo "Error";
-        }
-	}
-	
+<?php
 	require("db_close.php");
-	?>
+?>
 
 	
 </body>
