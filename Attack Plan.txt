@@ -68,9 +68,11 @@ PHP:
 		
 		(We only keep track of the highest bid and the user that put the highest bid)
 
-	createRide.php
+	offerRide.php
 		User can create a ride with him as a driver and set information, car etc…
 		Then he sets a starting price on his ride.
+		-> change ride table, rideid not necessary, select date box, eventually display 
+		   model next to carid, check price and date (local time?)
 
 		(adding a new entry to the ride Table, with client being null, and a min-price that the creator sets.)
 
