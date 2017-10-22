@@ -62,6 +62,13 @@
         location.href = "./editprofile.php";
     };
 </script>
+        
+        <button id="addCar" class="float-left submit-button" >Add Car</button>
+<script type="text/javascript">
+    document.getElementById("addCar").onclick = function () {
+        location.href = "./addcar.php";
+    };
+</script>
 
     </div>
     <!-- <a href="changepassword.php" class="button">Change Password</a> -->

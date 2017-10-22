@@ -9,14 +9,7 @@
     require("db_connect.php");
     $email = $_SESSION["email"];
     $query = "UPDATE person SET name = '".$_POST["name"]."', phone = '".$_POST["phone"]."', creditcard = '".$_POST["creditcard"]."' WHERE email = '$email';";
-    echo $query;
     $result = pg_query($con, $query);
-    echo "<br>";
-    echo $result;
-    echo "<br>";
-    $row    = pg_fetch_assoc($result);
-    echo $row;
-    echo "<br>";
     require("db_close.php");
     header("Location: profile.php");
     exit;
