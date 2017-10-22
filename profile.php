@@ -50,10 +50,21 @@
           </table>
         </div>
       </div>
+      <button id="chpass" class="float-left submit-button" >Change Password</button>
+<script type="text/javascript">
+    document.getElementById("chpass").onclick = function () {
+        location.href = "./changepassword.php";
+    };
+</script>
+        <button id="chprof" class="float-left submit-button" >Edit Details</button>
+<script type="text/javascript">
+    document.getElementById("chprof").onclick = function () {
+        location.href = "./editprofile.php";
+    };
+</script>
+
     </div>
-    <a href="changepassword.php" class="button">Change Password</a><!-- 
-    <button onclick="window.location.href='changepassword.php'">Change Password</button>
-    <button onclick="window.location.href='editprofile.php'">Edit details</button> -->
+    <!-- <a href="changepassword.php" class="button">Change Password</a> -->
   </div>
 </main>
 
