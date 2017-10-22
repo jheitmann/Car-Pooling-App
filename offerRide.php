@@ -21,7 +21,7 @@
     require("db_connect.php");
     echo "<p></p>";
 
-	$cars = pg_query($con, "SELECT car.carid FROM car WHERE car.owner = '" . $_SESSION['email'] . "'");
+	$cars = pg_query($con, "SELECT car.model, car.carid FROM car WHERE car.owner = '" . $_SESSION['email'] . "'");
 	if (pg_num_rows($cars) == 0) { 
 		echo " <section>
 			<svg width='1000' height='100'>
@@ -38,7 +38,7 @@
 	echo "<form name = update action='insertRide.php' method = 'POST'> Car : <select name='carid'><option value=''>Select...</option>";
 	while($choices = pg_fetch_assoc($cars)) { 
 		echo "<option value='".$choices['carid']."' ";
-		echo">".$choices['carid']."</option>";
+		echo">".$choices['model'].", ".$choices['carid']."</option>";
 	} 
 	echo "</select><br>";
 	
