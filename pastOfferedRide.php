@@ -22,7 +22,7 @@
     echo "<p></p>";
     
     $rides = pg_query($con, "SELECT * FROM car, ride WHERE car.owner = '" . $_SESSION['email'] . "' AND car.carid = ride.carid
-						ORDER BY ride.time_stamp");
+						ORDER BY ride.time_stamp DESC");
     
     if (pg_num_rows($rides) == 0) { 
 		echo " <section>
