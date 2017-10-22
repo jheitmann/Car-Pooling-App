@@ -9,6 +9,7 @@
 
     if(!$insert_return){
 		echo "Error: could not insert data.";
+		echo "Have you filled in all information?";
     }
 	require("db_close.php");
 	

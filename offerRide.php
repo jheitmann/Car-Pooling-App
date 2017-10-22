@@ -4,7 +4,7 @@
     header("Location: login.php");
     exit;
   }
-?>
+  ?>
 
 
 <!DOCTYPE html>
@@ -50,7 +50,9 @@
 		Minimum Price:
 		<input type="number" name="min" value="0"><br>
 		Datetime:
-		<input type="text" name="datetime" value="2017-10-23 16:00:00 GMT"><br><br>
+		<!-- <input type="text" name="datetime" value="2017-10-23 16:00:00 GMT"><br> -->
+		<input type="date" name="date" value="2017-10-23" step="1" name="IncidentDate"><input type="text" name="time" value="16:00" step="1"><br>
+		<br>
 		<input type="submit" value="Submit">
 	</form> 
 	
