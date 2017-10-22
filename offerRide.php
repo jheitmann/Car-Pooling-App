@@ -48,10 +48,13 @@
 		Destination:
 		<input type="text" name="destination" value="Marina Bay"><br>
 		Minimum Price:
-		<input type="number" name="min" value="0"><br>
-		Datetime:
-		<!-- <input type="text" name="datetime" value="2017-10-23 16:00:00 GMT"><br> -->
-		<input type="date" name="date" value="2017-10-23" step="1" name="IncidentDate"><input type="text" name="time" value="16:00" step="1"><br>
+		<input type="number" name="min" value="0" step="1" min="0"><br>
+		Date:
+		<input type="date" name="date" value="2017-10-23" step="1" name="IncidentDate">
+		Hour:
+		<input type="number" name="hour" value="12" step="1" min="0" max="23">
+		Minute:
+		<input type="number" name="minute" value="00" step="1" min="0" max="59"><br>
 		<br>
 		<input type="submit" value="Submit">
 	</form> 
