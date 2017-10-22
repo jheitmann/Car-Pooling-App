@@ -42,7 +42,7 @@ for i in range(50):
 	destination = random.randint(0,9)
 	while origin == destination:
 		destination = random.randint(0,9)
-	query = query + "INSERT INTO "+table+" VALUES('car"+str(carid)+"', '"+year+"-"+month+"-"+date+" "+hour+":"+minute+":" +second+" GMT', '"+locations[origin]+"', '"+locations[destination]+"', 4.00, 'ride"+k+"');\n"
+	query = query + "INSERT INTO "+table+" VALUES('car"+str(carid)+"', '"+year+"-"+month+"-"+date+" "+hour+":"+minute+":00', '"+locations[origin]+"', '"+locations[destination]+"', 4.00, "+k+");\n"
 f.write(query)
 
 
@@ -51,9 +51,8 @@ filename = table+".sql"
 f = open(filename, 'w')
 query = ""
 for i in range(25):
-	rideid = random.randint(0,49)
 	userid = random.randint(0,99)
-	query = query + "INSERT INTO "+table+" VALUES('user"+str(userid)+"@gmail.com', 4.00, 'ride"+str(rideid)+"');\n"
+	query = query + "INSERT INTO "+table+" VALUES('user"+str(userid)+"@gmail.com', 4.00, "+str(i)+");\n"
 f.write(query)
 
 table = "bid"
@@ -63,6 +62,6 @@ query = ""
 for i in range(25):
 	rideid = random.randint(0,49)
 	userid = random.randint(0,99)
-	query = query + "INSERT INTO "+table+" VALUES('user"+str(userid)+"@gmail.com', 4.00, 'ride"+str(rideid)+"');\n"
+	query = query + "INSERT INTO "+table+" VALUES('user"+str(userid)+"@gmail.com', 4.00, "+str(rideid)+");\n"
 f.write(query)
 
