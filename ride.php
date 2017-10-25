@@ -84,7 +84,7 @@
 					<text x='600' y='170' font-family='Verdana' font-size='20' fill='black'> Price : ".$row['price']." dollars </text>
 				</svg>
 				<form name='rideDetails' action='rideDetails.php' method='POST'>
-				<input type='hidden' name='id' value='".$row['rideid']."' />
+				<input type='hidden' name='rideid' value='".$row['rideid']."' />
 				<button type='submit' value='s'>Details</button>
 				</form>
 
