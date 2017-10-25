@@ -63,12 +63,17 @@
 		AND r.origin LIKE '%".$_GET[origin]."%'
 		AND r.destination LIKE '%".$_GET[destination]."%'
 		ORDER BY ".( isset($_GET[order])? $_GET[order] :"time_stamp"));
+
+    $update = pg_query($con, "UPDATE ride SET price = '".$POST["bid"]."' WHERE rideid = '".$row["rideid"]."'");
+
+    $insertBid = pg_query($con, "INSERT INTO bid VALUES('".$_SESSION['email']."', '".$POST["bid"]."', '". $row["carid"]."')");
 		
     if (!$result) {
 		echo "<h2>An error occurred.</h2>";
 		exit;
 	}
     while($row    = pg_fetch_assoc($result)){
+    	$minBid = $row['price'] + 1;
 		echo " <section>
 				<svg width='1000' height='240'>
 					<rect x='20' y='20' rx='20' ry='20' width='900' height='200'
@@ -82,9 +87,18 @@
 				<input type='hidden' name='id' value='".$row['rideid']."' />
 				<button type='submit' value='s'>Details</button>
 				</form>
+
+
+				<form name='newBid' action='newBid.php' method='POST'>
+				<input type='hidden' name='email' value='".$_SESSION['email']."'>
+				<input type='hidden' name='rideid' value='".$row["rideid"]."'>
+				<input type='number' name='bid' value='".$minBid."' step='1' min='".$minBid."' />
+				<input type='submit' value='New Bid'>
+				</form>
 			</section>
 		
 		";
+
 	}
 	
 	require("db_close.php");
