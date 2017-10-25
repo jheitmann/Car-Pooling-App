@@ -2,7 +2,7 @@
 
 	require("db_connect.php");
 	
-	$max = pg_query("SELECT MAX(rideid) + 1 AS max_id FROM ride");
+	$max = pg_query($con, "SELECT MAX(rideid) + 1 AS max_id FROM ride");
 	$row = pg_fetch_assoc($max);
 	
 	$insert = "INSERT INTO ride VALUES('".$_POST["carid"]."', '".$_POST["date"]." ".$_POST["hour"].":".$_POST["minute"].":00"."', 
