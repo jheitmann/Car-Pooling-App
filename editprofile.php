@@ -22,7 +22,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="w3.css">
 <body>
-  	
   <!-- Navigation -->
   <?php require('header.html');
         require("db_connect.php");
