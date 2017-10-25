@@ -12,6 +12,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
 	
 <!-- Navigation -->
@@ -36,21 +39,77 @@
 		
 		";
 	} else {
+		?>
+
+		<div class="table-responsive">          
+		  <table class="table table-hover">
+		    <thead>
+		      <tr>
+		        <th>Origin</th>
+		        <th>Destination</th>
+		        <th>Date & Time</th>
+		        <th>Your Bid</th>
+		        <th>Current Highest Bid</th>
+		        <th>Status</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		<?php
 		while($row = pg_fetch_assoc($rides)){
-			echo " <section>
-					<svg width='1000' height='240'>
-						<rect x='20' y='20' rx='20' ry='20' width='900' height='200'
-						style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-						<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> ID : ".$row['rideid']." </text>
-						<text x='80' y='110' font-family='Verdana' font-size='20' fill='black'> From : ".$row['origin']." </text>
-						<text x='80' y='140' font-family='Verdana' font-size='20' fill='black'> To : ".$row['destination']." </text>
-						<text x='80' y='170' font-family='Verdana' font-size='20' fill='black'> Date : ".$row['time_stamp']." </text>
-						<text x='600' y='170' font-family='Verdana' font-size='20' fill='black'> Price : ".$row['price']." dollars </text>
-						Sorry, your browser does not support inline SVG.
-					</svg>
-				</section>
-				";
+			$query = "SELECT bid_price FROM bid WHERE client = '".$_SESSION["email"]."' AND rideid = ".$row["rideid"];
+			$yourprice = pg_fetch_assoc(pg_query($con,$query));
+			$yourprice = $yourprice["bid_price"];
+
+			$query = "SELECT * FROM complete_ride WHERE rideid = ".$row["rideid"];
+			$result = pg_query($con,$query);
+			if(pg_num_rows($result) == 0){
+				//The ride has not been fixed yet
+				$status = "PENDING";
+			}
+			else{
+				$result = pg_fetch_assoc($result);
+				if(strcmp($_SESSION["email"], $result["client"]) == 0){
+					//The current user is winner
+					$status = "APPROVED";
+				}
+				else{
+					$status = "REJECTED";
+				}
+			}
+			echo " <tr>
+		        <td>".$row['origin']."</td>
+		        <td>".$row['destination']."</td>
+		        <td>".$row['time_stamp']."</td>
+		        <td>$ ".$yourprice."</td>
+		        <td>$ ".$row['price']."</td>";
+
+		        if(strcmp($status, "PENDING")==0){
+		        	echo '<td><form action = "rideDetails.php" method="POST">
+		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">
+		  	  <input type="submit" value="BID MORE">
+		  </form></td>';
+		        }
+		        elseif (strcmp($status, "APPROVED")==0) {
+					echo "<td><button style='background-color:green'>APPROVED</button></td>";
+		        }
+		        elseif (strcmp($status, "REJECTED")==0) {
+		        	echo "<td><button style='background-color:red'>REJECTED</button></td>";
+		        }
+
+		     echo " </tr>";
 		}
+		?>
+		    </tbody>
+		  </table>
+		  </div>
+		  
+		  <script>
+			function bidmore() {
+			    document.getElementById("demo").innerHTML = "Hello World";
+			}
+			</script>
+		  		
+		<?php 
 	} 
     
     require("db_close.php");
