@@ -2,8 +2,8 @@
 
 	require("db_connect.php");
 
-	$checkBid = "SELECT * FROM bid WHERE client = '".$_POST["email"]."' AND rideid ='".$_POST["rideid"]."'";
-
+	$checkBid = "SELECT * FROM bid WHERE client = '".$_POST["email"]."' AND rideid =".$_POST["rideid"];
+	
 	if(!pg_fetch_assoc($checkBid)){
 		$insertBid = "INSERT INTO bid VALUES('".$_POST["email"]."', '".$_POST["bid"]."', '".$_POST["rideid"]."') ";
 
