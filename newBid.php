@@ -11,8 +11,7 @@
 	    if(!$insert_return){
 			echo "Error: could not insert Bid.";
     	}	
-    } elseif(pg_fetch_assoc($checkBid)) {
-    #else {
+    } else {
     	$updateBid = "UPDATE bid SET bid_price = '".$_POST["bid"]."' WHERE rideid = '".$_POST["rideid"]."'";
 
 	    $update_return = pg_query($con, $updateBid);
