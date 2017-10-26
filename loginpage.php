@@ -75,11 +75,7 @@ body {
           <div class="input-field col s6 m6 l6">
             <p class="margin medium-small"><a href="register.php">Register Now!</a></p>
           </div>
-          <div class="input-field col s6 m6 l6">
-              <p class="margin right-align medium-small"><a href="forgot_password.php">Forgot password?</a></p>
-          </div>          
         </div>
-
       </form>
     </div>
   </div>

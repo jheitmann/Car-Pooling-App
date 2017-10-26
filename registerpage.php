@@ -30,76 +30,56 @@ body {
 <body class="white">
     <div class="col s12 z-depth-6 card-panel">
       <form class="login-form" method="post">
-        <div class="row">
-          <div class="input-field col s12 center">
-            <img src="logo.png" alt="" class="responsive-img valign profile-image-login" style="padding: 5%; width:400px;height:150px;">
-            <p class="center login-form-text"></p>
-          </div>
-        </div>
-        
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-social-person-outline prefix"></i>
-            <input class="validate" id="email" type="email" name="email">
+            <input class="validate" id="email" type="email" name="email" required>
             <label for="email">Email</label>
+            <?php if($email_not_available){
+              ?>
+                <span class="help-block">Email already used</span>
+              <?php
+            } ?>
           </div>
         </div>
-
-        <?php if($email_not_available){
-          echo '<div class="row">
-                  <div class="input-field col s12">
-                    Email already used
-                  </div>
-                </div>';
-         } ?>
-        
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-action-lock-outline prefix"></i>
-            <input id="name" type="text" name ="name">
+            <input id="name" type="text" name ="name" required>
             <label for="name">Name</label>
           </div>
         </div>
 
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-action-lock-outline prefix"></i>
-            <input id="password" type="password" name ="password">
+            <input id="password" type="password" name ="password" required>
             <label for="password">Password</label>
           </div>
         </div>
 
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-action-lock-outline prefix"></i>
-            <input id="password_again" type="password" name ="password_again">
+            <input id="password_again" type="password" name ="password_again" required> 
             <label for="password_again">Re-type password</label>
-          </div>
+            <?php if(!$pass_match){
+              ?>
+                <span class="help-block">Password doesnot match</span>
+              <?php
+            } ?>
+            </div>
         </div>
-
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-action-lock-outline prefix"></i>
-            <input id="phone" type="number" name ="phone">
+            <input id="phone" type="number" name ="phone" required>
             <label for="Phone">Phone number</label>
           </div>
         </div>
 
         <div class="row margin">
           <div class="input-field col s12">
-            <i class="mdi-action-lock-outline prefix"></i>
-            <input id="credit_number" type="text" name ="credit_number">
+            <input id="credit_number" type="text" name ="credit_number" required>
             <label for="credit_number">Credit Card number</label>
           </div>
         </div>
 
-        <div class="row">
-          <div class="input-field col s12">
-            <?php if(!$pass_match){
-              echo "Password doesnot match";
-            } ?>
-          </div>
-        </div>
 
         <div class="row">
           <div class="input-field col s12">
