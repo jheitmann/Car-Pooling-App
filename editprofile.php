@@ -51,8 +51,8 @@
           <?php echo '<input name="creditcard" type="text" class="form-control" id="creditcard" value = "'.$row["creditcard"].'"required>'; ?>
         </div>
         <div class="form-group"> 
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Submit</button>
+          <div class="text-center">
+            <button type="submit" class="btn btn-success">Submit</button>
           </div>
         </div>
       </form> 
