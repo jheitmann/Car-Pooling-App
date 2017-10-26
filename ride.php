@@ -88,10 +88,7 @@
 		AND r.destination LIKE '%".$_GET[destination]."%'
 		ORDER BY ".( isset($_GET[order])? $_GET[order] :"time_stamp"));
 
-    $update = pg_query($con, "UPDATE ride SET price = '".$POST["bid"]."' WHERE rideid = '".$row["rideid"]."'");
 
-    $insertBid = pg_query($con, "INSERT INTO bid VALUES('".$_SESSION['email']."', '".$POST["bid"]."', '". $row["carid"]."')");
-		
     if (!$result) {
 		echo "<h2>An error occurred.</h2>";
 		exit;
