@@ -12,6 +12,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
 	
 <!-- Navigation -->
@@ -74,28 +75,34 @@
 	}
     while($row    = pg_fetch_assoc($result)){
     	$minBid = $row['price'] + 1;
-		echo " <section>
-				<svg width='1000' height='240'>
-					<rect x='20' y='20' rx='20' ry='20' width='900' height='200'
-					  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-					<text x='80' y='110' font-family='Verdana' font-size='20' fill='black'> From : ".$row['origin']." </text>
-					<text x='80' y='140' font-family='Verdana' font-size='20' fill='black'> To : ".$row['destination']." </text>
-					<text x='80' y='170' font-family='Verdana' font-size='20' fill='black'> Date : ".$row['time_stamp']." </text>
-					<text x='600' y='170' font-family='Verdana' font-size='20' fill='black'> Price : ".$row['price']." dollars </text>
-				</svg>
-				<form name='rideDetails' action='rideDetails.php' method='POST'>
-				<input type='hidden' name='id' value='".$row['rideid']."' />
-				<button type='submit' value='s'>Details</button>
-				</form>
+		echo " 
+		<div class='w3-container w3-card w3-light-grey w3-margin-bottom w3-margin-left w3-margin-right'>
+		<div class='w3-row-padding'>
+			<div class='w3-container w3-xlarge w3-half'>
+				<h5 class='w3-opacity'><i class='fa fa-location-arrow fa-fw w3-margin-right w3-large w3-text-black'></i><i class='w3-margin-right w3-text-teal'>Departure</i>".$row['origin']."</h5>
+				<h5 class='w3-opacity'><i class='fa fa-map-marker fa-fw w3-margin-right w3-large w3-text-black'></i><i class=' w3-margin-right w3-text-teal'>Arrival</i>".$row['destination']."</h5>
+				<h5 class='w3-opacity'><i class='fa fa-calendar fa-fw w3-margin-right w3-large w3-text-black'></i><i class='w3-margin-right w3-text-teal'>Date</i>".$row['time_stamp']."</h5>
+				<h5 class='w3-opacity'><i class='fa fa-dollar fa-fw w3-margin-right w3-large w3-text-black'></i><i class='w3-margin-right w3-text-teal'>Price</i>".$row['price']."</h5>
+			
+			</div>
+			<div class='w3-half w3-container'>
+				<div class='w3-container w3-cell w3-cell-middle'>
+					<form name='rideDetails' action='rideDetails.php' method='POST'>
+					<input type='hidden' name='rideid' value='".$row['rideid']."' />
+					<button type='submit' value='s'>Details</button>
+					</form>
 
 
-				<form name='newBid' action='newBid.php' method='POST'>
-				<input type='hidden' name='email' value='".$_SESSION['email']."'>
-				<input type='hidden' name='rideid' value='".$row["rideid"]."'>
-				<input type='number' name='bid' value='".$minBid."' step='1' min='".$minBid."' />
-				<input type='submit' value='New Bid'>
-				</form>
-			</section>
+					<form name='newBid' action='newBid.php' method='POST'>
+					<input type='hidden' name='email' value='".$_SESSION['email']."'>
+					<input type='hidden' name='rideid' value='".$row['rideid']."'>
+					<input type='number' name='bid' value='".$minBid."' step='1' min='".$minBid."' />
+					<input type='submit' value='New Bid'>
+					</form>
+				</div>
+			</div>
+		</div>
+		</div>
 		
 		";
 
