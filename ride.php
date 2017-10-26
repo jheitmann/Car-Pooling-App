@@ -85,7 +85,9 @@
 		
 				<form class='w3-container w3-margin-bottom' name='rideDetails' action='rideDetails.php' method='POST'>
 				<input type='hidden' name='rideid' value='".$row['rideid']."' />
-				<button type='submit' value='s'>Details</button>
+				<div class='w3-center'>
+				<button class='w3-button w3-small w3-white w3-border w3-border-teal w3-round-small' type='submit' value='s'>Details</button>
+				</div>
 				</form>
 			</div>
 			<div class='w3-half w3-container'>
@@ -96,7 +98,9 @@
 					<input type='hidden' name='rideid' value='".$row['rideid']."'>
 					<label class='w3-text-teal'>Make an offer</label>
 					<input class='w3-input' type='number' name='bid' step=0.05 min='".$minBid."' />
-					<input type='submit' value='New Bid'>
+					<div class='w3-right w3-margin-bottom'>
+						<input class='w3-btn w3-teal' type='submit' value='New Bid'>
+					</div>
 					</form>
 					
 				</div>
