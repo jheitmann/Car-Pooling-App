@@ -116,7 +116,7 @@
 				<div class='w3-container w3-margin-bottom'>
 					<form class='w3-container w3-card' name='newBid' action='newBid.php' method='POST'>
 					<input type='hidden' name='email' value='".$_SESSION['email']."'>
-					<input type='hidden' name='rideid' value='".$row['rideid']."'>
+					<input type='hidden' name='rideid' value=".$row['rideid'].">
 					<label class='w3-text-teal'>Make an offer</label>
 					<input class='w3-input' type='number' name='bid' step=0.05 min='".$minBid."' />
 					<div class='w3-right w3-margin-bottom'>
