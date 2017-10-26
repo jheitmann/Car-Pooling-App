@@ -102,13 +102,6 @@
 		    </tbody>
 		  </table>
 		  </div>
-		  
-		  <script>
-			function bidmore() {
-			    document.getElementById("demo").innerHTML = "Hello World";
-			}
-			</script>
-		  		
 		<?php 
 	} 
     
