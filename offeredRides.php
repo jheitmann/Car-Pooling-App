@@ -96,7 +96,7 @@
 		?>
 		    </tbody>
 		  </table>
-		  </div>s
+		  </div>
 		  		
 		<?php 
 	} 
