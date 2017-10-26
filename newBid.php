@@ -4,14 +4,14 @@
 
 	$checkBid = "SELECT * FROM bid WHERE client = '".$_POST["email"]."' AND rideid ='".$_POST["rideid"]."'";
 
-	if(pg_fetch_assoc($checkBid)){
+	if(!pg_fetch_assoc($checkBid)){
 		$insertBid = "INSERT INTO bid VALUES('".$_POST["email"]."', '".$_POST["bid"]."', '".$_POST["rideid"]."') ";
 
 		$insert_return = pg_query($con, $insertBid);
 	    if(!$insert_return){
 			echo "Error: could not insert Bid.";
     	}	
-    } elseif(!pg_fetch_assoc($checkBid)) {
+    } elseif(pg_fetch_assoc($checkBid)) {
     #else {
     	$updateBid = "UPDATE bid SET bid_price = '".$_POST["bid"]."' WHERE rideid = '".$_POST["rideid"]."'";
 
