@@ -30,13 +30,32 @@
         $result = pg_query($con, $query);
         $row    = pg_fetch_assoc($result);
   ?>
-  <form action='editprofile.php' method = 'POST'> 
-    Email : <?php echo $email; ?><br>
-    Name: <?php echo '<input type="text" name="name" value="'.$row['name'].'">'; ?><br>
-    phone: <?php echo '<input type="number" name="phone" value="'.$row['phone'].'">'; ?><br>
-    Credit Card Number: <?php echo '<input type="text" name="creditcard" value="'.$row['creditcard'].'">'; ?><br>
-    <input type="submit" value="Submit">
-  </form> 
 
+  <div class="container">
+
+      <form class="form-horizontal" method="POST" action="editprofile.php">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <?php echo '<input name="email" type="email" class="form-control" id="email" value = "'.$row["email"].'"disabled>'; ?>
+        </div>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <?php echo '<input name="name" type="text" class="form-control" id="name" value = "'.$row["name"].'"required>'; ?>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number:</label>
+          <?php echo '<input name="phone" type="number" class="form-control" id="phone" value = "'.$row["phone"].'"required>'; ?>
+        </div>
+        <div class="form-group">
+          <label for="creditcard">Credit Card Number:</label>
+          <?php echo '<input name="creditcard" type="text" class="form-control" id="creditcard" value = "'.$row["creditcard"].'"required>'; ?>
+        </div>
+        <div class="form-group"> 
+          <div class="text-center">
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+        </div>
+      </form> 
+    </div>
 </body>
 </html>

@@ -38,16 +38,39 @@
   	
   <!-- Navigation -->
   <?php require('header.html');  ?>
-  <form action='addcar.php' method = 'POST'> 
-    Car Model : <input type="text" name="model"> <br>
-    Car Color : <input type="text" name="color"> <br>
-    Car Number : <input type="text" name="carid"> <br>
-    <?php if($carnumberused){
-      echo "Car Number already Registered in system<br>";
-    } ?>
-    Car available Capacity : <input type="number" name="capacity"> <br>
-    <input type="submit" value="Submit">
-  </form> 
+
+
+  <div class="container">
+      <form class="form-horizontal" method="POST" action="addcar.php">
+        <div class="form-group">
+          <label for="model">Car Model:</label>
+          <input name="model" type="text" class="form-control" id="model" required>
+        </div>
+        <div class="form-group">
+          <label for="color">Car Color:</label>
+          <input name="color" type="text" class="form-control" id="color" required>
+        </div>
+        <div class="form-group">
+          <label for="carid">Car Number:</label>
+          <input name = "carid" type="text" class="form-control" id="carid" required>
+          <?php if($carnumberused){
+            ?>
+                <span class="help-block">Car Number already Registered in system</span>
+            <?php
+          } ?>
+        </div>
+        <div class="form-group">
+          <label for="capacity">Car Capacity offered:</label>
+          <input name="capacity" type="number" class="form-control" id="capacity" value = "1" min = "1" step = "1" required>
+        </div>
+        <div class="form-group"> 
+          <div class="text-center">
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+        </div>
+      </form> 
+    </div>
+    
 
 </body>
 </html>

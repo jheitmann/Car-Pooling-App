@@ -46,21 +46,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="w3.css">
 <body>
-	
+  
 <!-- Navigation -->
-<?php require('header.html');?>
-
-  <form action='changepassword.php' method = 'POST'> 
-    Old Password : <input type="password" name="old_password"><br>
-                <?php if($incorrect_old){
-                  echo "Incorrect old password<br>";
-                } ?>
-    New Password : <input type="password" name="new_password"><br>
-    Retype New Password : <input type="password" name="new_password2"><br>
-                <?php if(!$match){
-                  echo "Password doesnot match<br>";
-                } ?>
-    <input type="submit" value="Submit">
-  </form>
+<?php require('header.html');?>  
+  <div class="container">
+      <form class="form-horizontal" method="POST" action="changepassword.php">
+        <div class="form-group">
+          <label for="old_password">Old Password:</label>
+          <input name="old_password" type="password" class="form-control" id="old_password" required>
+          <?php if($incorrect_old){
+            ?>
+                <span class="help-block">Incorrect old password</span>
+            <?php
+          } ?>
+        </div>
+        <div class="form-group">
+          <label for="new_password">New Password:</label>
+          <input name="new_password" type="password" class="form-control" id="new_password" required>
+        </div>
+        <div class="form-group">
+          <label for="new_password2">Retype New Password:</label>
+          <input name="new_password2" type="password" class="form-control" id="new_password2" required>
+          <?php if(!$match){
+            ?>
+                <span class="help-block">Password doesnot match</span>
+            <?php
+          } ?>
+        </div>
+        <div class="form-group"> 
+          <div class="text-center">
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+        </div>
+      </form> 
+    </div>
 </body>
 </html>
