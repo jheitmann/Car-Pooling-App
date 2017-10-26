@@ -65,12 +65,14 @@
 			<div class = "col-md-4">
 			  <select class="form-control" id="order" name="order">
 			  	<option value="time_stamp">Date</option>
-				<option value="price">Price</option>
+				<option value="price">Price (lowest) </option>
+				<option value="price DESC">Price (higest) </option>
 			  </select>
 			</div>
 			<div class="col-md-4"></div>
+			<br>
 			<div class="col-md-3">
-				<button type="submit" class="btn btn-success">Submit</button>
+				<button type="submit" class="btn btn-success w3-button w3-round w3-teal w3-right">Search</button>
 			</div>
 		</div>
 	</form>

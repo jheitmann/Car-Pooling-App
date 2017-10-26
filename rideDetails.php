@@ -50,7 +50,7 @@ if (!$bids) {
 }
 $bestBid = pg_fetch_assoc($bids);
 ?>
-<div class="w3-content w3-margin-top" style="max-width:1400px;">
+<div class="w3-content w3-margin-top" font="Verdana" style="max-width:1400px;">
 
   <!-- The Grid -->
   <div class="w3-row-padding">
@@ -122,7 +122,7 @@ $bestBid = pg_fetch_assoc($bids);
 						<h5 class='w3-large'>".($current_best?"<b class='w3-text-grey'>You are already offering the best bid </b>":"")."</h5>
 				";
 			}else{
-				echo "<h5 class='w3-xlarge'><g>There is no bid at the moment.</g></h5>
+				echo "<h5 class='w3-large'>There is no bid at the moment</h5>
 					<h5 class='w3-xlarge'><g>Starting Price = </g><i class='w3-text-blue'>".$ride['price']."</i></h5>
 					<hr>";
 			}
