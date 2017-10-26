@@ -74,31 +74,31 @@
 		exit;
 	}
     while($row    = pg_fetch_assoc($result)){
-    	$minBid = $row['price'] + 1;
+    	$minBid = $row['price'] + 0.05;
 		echo " 
 		<div class='w3-container w3-card w3-light-grey w3-margin-bottom w3-margin-left w3-margin-right'>
 		<div class='w3-row-padding'>
-			<div class='w3-container w3-xlarge w3-half'>
+			<div class='w3-container w3-medium w3-half'>
 				<h5 class='w3-opacity'><i class='fa fa-location-arrow fa-fw w3-margin-right w3-large w3-text-black'></i><i class='w3-margin-right w3-text-teal'>Departure</i>".$row['origin']."</h5>
 				<h5 class='w3-opacity'><i class='fa fa-map-marker fa-fw w3-margin-right w3-large w3-text-black'></i><i class=' w3-margin-right w3-text-teal'>Arrival</i>".$row['destination']."</h5>
 				<h5 class='w3-opacity'><i class='fa fa-calendar fa-fw w3-margin-right w3-large w3-text-black'></i><i class='w3-margin-right w3-text-teal'>Date</i>".$row['time_stamp']."</h5>
-				<h5 class='w3-opacity'><i class='fa fa-dollar fa-fw w3-margin-right w3-large w3-text-black'></i><i class='w3-margin-right w3-text-teal'>Price</i>".$row['price']."</h5>
-			
+		
+				<form class='w3-container w3-margin-bottom' name='rideDetails' action='rideDetails.php' method='POST'>
+				<input type='hidden' name='rideid' value='".$row['rideid']."' />
+				<button type='submit' value='s'>Details</button>
+				</form>
 			</div>
 			<div class='w3-half w3-container'>
-				<div class='w3-container w3-cell w3-cell-middle'>
-					<form name='rideDetails' action='rideDetails.php' method='POST'>
-					<input type='hidden' name='rideid' value='".$row['rideid']."' />
-					<button type='submit' value='s'>Details</button>
-					</form>
-
-
-					<form name='newBid' action='newBid.php' method='POST'>
+				<h5 class='w3-opacity'><b class='w3-margin-right w3-margin-left w3-text-teal'>Current price</b>".$row['price']."<i class='fa fa-dollar fa-fw w3-margin-right w3-large w3-text-black'></i></h5>
+				<div class='w3-container w3-margin-bottom'>
+					<form class='w3-container w3-card' name='newBid' action='newBid.php' method='POST'>
 					<input type='hidden' name='email' value='".$_SESSION['email']."'>
 					<input type='hidden' name='rideid' value='".$row['rideid']."'>
-					<input type='number' name='bid' value='".$minBid."' step='1' min='".$minBid."' />
+					<label class='w3-text-teal'>Make an offer</label>
+					<input class='w3-input' type='number' name='bid' step=0.05 min='".$minBid."' />
 					<input type='submit' value='New Bid'>
 					</form>
+					
 				</div>
 			</div>
 		</div>
