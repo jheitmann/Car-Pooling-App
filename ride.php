@@ -74,7 +74,7 @@
 		exit;
 	}
     while($row    = pg_fetch_assoc($result)){
-    	$minBid = $row['price'] + 1;
+    	$minBid = $row['price'] + 0.05;
 		echo " 
 		<div class='w3-container w3-card w3-light-grey w3-margin-bottom w3-margin-left w3-margin-right'>
 		<div class='w3-row-padding'>
