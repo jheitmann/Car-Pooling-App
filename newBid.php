@@ -12,11 +12,24 @@
 	echo $_POST["rideid"];
 
 
-    $insert = "INSERT INTO bid VALUES('".$_POST["email"]."', '".$_POST["bid"]."', '".$_POST["rideid"]."') ";
-    
-    $insert_return = pg_query($con, $insert);
-    if(!$insert_return){
-		echo "Error: could not insert data.";
+	$checkBid = pg_query($con, "SELECT * FROM bid WHERE client = '".$_POST["email"]."' AND rideid ='".$_POST["rideid"]."'");
+
+	if(!isset($checkBid)){
+		$insertBid = "INSERT INTO bid VALUES('".$_POST["email"]."', '".$_POST["bid"]."', '".$_POST["rideid"]."') ";
+
+		$insert_return = pg_query($con, $insertBid);
+	    if(!$insert_return){
+			echo "Error: could not insert Bid.";
+    	}	
+    }
+
+    else{
+    	$updateBid = "UPDATE bid SET bid_price = '".$_POST["bid"]."' WHERE client = '".$_POST["email"]."' AND rideid = '".$_POST["rideid"]."'";
+
+	    $update_return = pg_query($con, $updateBid);
+	    if(!$update_return){
+			echo "Error: could not update Bid.";
+	    }
     }
 
 
