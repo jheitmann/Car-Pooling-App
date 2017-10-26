@@ -19,13 +19,13 @@
 			echo "Error: could not update Bid.";
 	    }
     }
-
+/*
     $update = "UPDATE ride SET price = '".$_POST["bid"]."' WHERE rideid = '".$_POST["rideid"]."'";
 
     $update_return = pg_query($con, $update);
     if(!$update_return){
 		echo "Error: could not update data.";
-    }
+    }*/
 
 	require("db_close.php");
 	require("ride.php");
