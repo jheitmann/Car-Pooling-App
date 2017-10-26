@@ -13,7 +13,7 @@
 			echo "Error: could not insert Bid.";
     	}	
     } else {
-    	$updateBid = "UPDATE bid SET bid_price = '".$_POST["bid"]."' WHERE rideid = '".$_POST["rideid"]."'";
+    	$updateBid = "UPDATE bid SET bid_price = '".$_POST["bid"]."' WHERE client='".$_POST["email"]."' AND rideid = '".$_POST["rideid"]."'";
 
 	    $update_return = pg_query($con, $updateBid);
 	    if(!$update_return){
