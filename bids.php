@@ -86,20 +86,19 @@
 		        if(strcmp($status, "PENDING")==0){
 		        	echo '<td><form action = "rideDetails.php" method="POST">
 		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">
-		  	  <input type="submit" value="BID MORE">
+		  	  <button type="submit" class="btn">BID MORE</button>
 		  </form></td>';
 		        }
 		        elseif (strcmp($status, "APPROVED")==0) {
-					echo "<td><button style='background-color:green'>APPROVED</button></td>";
+					echo "<td><button class='btn btn-success'>APPROVED</button></td>";
 		        }
 		        elseif (strcmp($status, "REJECTED")==0) {
-		        	echo "<td><button style='background-color:red'>REJECTED</button></td>";
+		        	echo "<td><button class='btn btn-danger'>REJECTED</button></td>";
 		        }
-
-		     echo " </tr>";
+			echo " </tr>";
 		}
 		?>
-		    </tbody>
+		</tbody>
 		  </table>
 		  </div>
 		<?php 
