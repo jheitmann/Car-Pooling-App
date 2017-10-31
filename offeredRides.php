@@ -58,9 +58,9 @@
 				
 		<?php
 		while($row = pg_fetch_assoc($allRides)){
-			$query = "SELECT * FROM complete_ride WHERE rideid = ".$row["rideid"];
+			$query = "SELECT * FROM complete_ride WHERE rideid = ".$row['rideid'];
 			$completed_rides = pg_query($con,$query);
-			$query = "SELECT * FROM bid WHERE rideid = ".$row["rideid"];
+			$query = "SELECT * FROM bid WHERE rideid = ".$row['rideid'];
 			$bids = pg_query($con,$query);
 			if(pg_num_rows($completed_rides) == 0){
 				if(pg_num_rows($bids) == 0) {
@@ -79,18 +79,16 @@
 		        <td>$ ".$row['price']."</td>";
 
 		        if(strcmp($status, "ACCEPT")==0){
-					$query = "SELECT client FROM bid WHERE bid_price = ".$row["price"];
 		        	echo '<td><form action = "acceptRide.php" method="POST">
 		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">
-		  	<input type = "hidden" name = "client" value = "'.pg_fetch_assoc(pg_query($con, $query))["client"].'">
-		  	  <input type="submit" value="ACCEPT">
+		  	  <button type="submit" class="btn btn-block">ACCEPT</button>
 		  </form></td>';
 		        }
 		        else if(strcmp($status, "PENDING")==0) {
-					echo "<td><button style='background-color:red'>PENDING</button></td>";
+					echo "<td><button class='btn btn-danger btn-block'>PENDING</button></td>";
 		        }
 		        else {
-					echo "<td><button style='background-color:green'>COMPLETED</button></td>";
+					echo "<td><button class='btn btn-success btn-block'>COMPLETED</button></td>";
 				}
 
 		     echo " </tr>";
