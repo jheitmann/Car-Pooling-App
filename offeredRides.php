@@ -50,7 +50,7 @@
 		        <th>Origin</th>
 		        <th>Destination</th>
 		        <th>Date & Time</th>
-		        <th>Current Highest Bid</th>
+		        <th>Highest Bid</th>
 		        <th>Status</th>
 		      </tr>
 		    </thead>
@@ -75,19 +75,21 @@
 			echo " <tr>
 		        <td>".$row['origin']."</td>
 		        <td>".$row['destination']."</td>
-		        <td>".$row['time_stamp']."</td>
-		        <td>$ ".$row['price']."</td>";
-
+		        <td>".$row['time_stamp']."</td>";
+		        
 		        if(strcmp($status, "ACCEPT")==0){
+					echo "<td>".$row['price']."</td>";
 		        	echo '<td><form action = "acceptRide.php" method="POST">
 		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">
 		  	  <button type="submit" class="btn btn-block">ACCEPT</button>
 		  </form></td>';
 		        }
 		        else if(strcmp($status, "PENDING")==0) {
+					echo "<td>-</td>";
 					echo "<td><button class='btn btn-danger btn-block'>PENDING</button></td>";
 		        }
 		        else {
+					echo "<td>".$row['price']."</td>";
 					echo "<td><button class='btn btn-success btn-block'>COMPLETED</button></td>";
 				}
 
