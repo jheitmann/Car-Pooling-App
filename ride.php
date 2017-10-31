@@ -29,7 +29,7 @@
 			  <select class="form-control" id="origin" name="origin">
 			    <option>Select...</option>
 			    <?php
-					$locations = pg_query($con, "SELECT DISTINCT origin FROM ride");
+					$locations = pg_query($con, "SELECT DISTINCT origin FROM ride ORDER BY origin");
 					while($choices = pg_fetch_assoc($locations)){
 						echo "<option value='".$choices['origin']."' ";
 						if(isset($_GET[origin]) && $_GET[origin] == $choices['origin']){
@@ -46,7 +46,7 @@
 			  <select class="form-control" id="destination" name="destination">
 			    <option>Select...</option>
 			    <?php
-					$locations = pg_query($con, "SELECT DISTINCT destination FROM ride");
+					$locations = pg_query($con, "SELECT DISTINCT destination FROM ride ORDER BY destination");
 					while($choices = pg_fetch_assoc($locations)){
 						echo "<option value='".$choices['destination']."' ";
 						if(isset($_GET[destination]) && $_GET[destination] == $choices['destination']){
@@ -90,8 +90,16 @@
 
 
     if (!$result) {
-		echo "<h2>An error occurred.</h2>";
-		exit;
+		echo " <section>
+			<svg width='1000' height='100'>
+				<rect x='20' y='20' rx='20' ry='20' width='900' height='80'
+				  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
+				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> There are no available rides. </text>
+				Sorry, your browser does not support inline SVG.
+			</svg>
+		</section>
+		
+		";
 	}
     while($row    = pg_fetch_assoc($result)){
     	$minBid = $row['price'] + 0.05;
