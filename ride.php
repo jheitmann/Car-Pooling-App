@@ -90,8 +90,9 @@
 	<?php
 	$date_set =isset($_GET[date]) &&  $_GET[date]!="" ;
 	
-    $result = pg_query($con, "SELECT * FROM ride r 
-		where r.rideid NOT IN (Select c.rideid from complete_ride c) ".
+    $result = pg_query($con, "SELECT * FROM ride r, car
+		where r.rideid NOT IN (Select c.rideid from complete_ride c)
+		 AND r.carid=car.carid AND car.owner<>'".$_SESSION['email']."' ".
 		( isset($_GET[origin])?"AND r.origin LIKE '%".$_GET[origin]."%' ":"").
 		( isset($_GET[destination])?"AND r.destination LIKE '%".$_GET[destination]."%' ":"").
 		($date_set?"AND DATE(r.time_stamp)='".$_GET[date]."' ":"").
