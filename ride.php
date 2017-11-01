@@ -21,13 +21,14 @@
 <?php
   	// Connect to the database. Please change the password in the following line accordingly
     require("db_connect.php");?>
+    
     <div class = "container">
     <form class="form-horizontal" method="GET" action="ride.php">
 		<div class="form-group">
 		  <div class="col-md-6">
 			  <label for="origin">Departure:</label>
 			  <select class="form-control" id="origin" name="origin">
-			    <option>Select...</option>
+			    <option value="">Select...</option>
 			    <?php
 					$locations = pg_query($con, "SELECT DISTINCT origin FROM ride ORDER BY origin");
 					while($choices = pg_fetch_assoc($locations)){
@@ -44,7 +45,7 @@
 		  <div class="col-md-6">
 			  <label for="destination">Destination:</label>
 			  <select class="form-control" id="destination" name="destination">
-			    <option>Select...</option>
+			    <option value="">Select...</option>
 			    <?php
 					$locations = pg_query($con, "SELECT DISTINCT destination FROM ride ORDER BY destination");
 					while($choices = pg_fetch_assoc($locations)){
@@ -83,10 +84,10 @@
 	<?php
 	
     $result = pg_query($con, "SELECT * FROM ride r 
-		where r.rideid NOT IN (Select c.rideid from complete_ride c)
-		AND r.origin LIKE '%".$_GET[origin]."%'
-		AND r.destination LIKE '%".$_GET[destination]."%'
-		ORDER BY ".( isset($_GET[order])? $_GET[order] :"time_stamp"));
+		where r.rideid NOT IN (Select c.rideid from complete_ride c)".
+		( isset($_GET[origin])?"AND r.origin LIKE '%".$_GET[origin]."%'":"").
+		( isset($_GET[origin])?"AND r.destination LIKE '%".$_GET[destination]."%'":"").
+		"ORDER BY ".( isset($_GET[order])? $_GET[order] :"time_stamp"));
 
 
     if (!$result) {
@@ -94,7 +95,7 @@
 			<svg width='1000' height='100'>
 				<rect x='20' y='20' rx='20' ry='20' width='900' height='80'
 				  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> There are no available rides. </text>
+				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> Error with the database </text>
 				Sorry, your browser does not support inline SVG.
 			</svg>
 		</section>
@@ -102,7 +103,7 @@
 		";
 	}
     while($row    = pg_fetch_assoc($result)){
-    	$minBid = $row['price'] + 0.05;
+    	$minBid = $row['price'];
 		echo " 
 		<div class='w3-container w3-card w3-light-grey w3-margin-bottom w3-margin-left w3-margin-right'>
 		<div class='w3-row-padding'>
