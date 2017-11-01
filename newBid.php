@@ -2,16 +2,7 @@
 
 	require("db_connect.php");
 
-	# If statement protecting from change if the current price in the databse is higher than the new bid "bid"
-
-	
-
-	$bidHackProtection = "SELECT * FROM bid WHERE rideid='".$_POST["rideid"]."' AND price > ".$_POST["bid"];
-	$hackCheck = pg_query($con,$bidHackProtection);
-
-	# Make it so that the first bid can be equal to the "min Prize"
-
-	if(!pg_fetch_assoc($hackCheck)){
+	if($_POST["min_bid"] <= $_POST["bid"]){
 		$checkBid = "SELECT * FROM bid WHERE client='".$_POST["email"]."' AND rideid=".$_POST["rideid"];
 		$check = pg_query($con,$checkBid);
 		
