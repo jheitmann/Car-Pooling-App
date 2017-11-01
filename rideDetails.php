@@ -127,11 +127,8 @@ $bestBid = pg_fetch_assoc($bids);
 					<hr>";
 			}
 			if(!$current_best){ // Add the action here!!! And we need to define minbid
-
-				$query = "SELECT * FROM bid WHERE rideid = ".$ride['rideid'];
-				$bids = pg_query($con, $query);
 				
-				if(pg_num_rows($bids) == 0) {    	// $ride instead of $row
+				if(!$bestBid) {    	// $ride instead of $row
 					$minBid = $ride['price'];
 				} else {
 					$minBid = $ride['price'] + 0.5;

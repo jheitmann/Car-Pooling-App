@@ -11,8 +11,17 @@ for i in range(100):
 	k = str(i)
 	phone = random.randint(1000000000,9999999999)
 	password = hash_func("pass"+k)
-	query = query + "INSERT INTO "+table+" VALUES('user"+k+"@gmail.com', 'user"+k+"', "+str(phone)+", '1234-43213-1231-12312', '"+password+"');\n"
+	query = query + "INSERT INTO "+table+" VALUES('user"+k+"@gmail.com', 'user"+k+"', "+str(phone)+", '1234-43213-1231-12312', '"+password+"', FALSE);\n"
+
+for i in range(4):
+	k = str(i)
+	phone = random.randint(1000000000,9999999999)
+	password = hash_func("admin"+k)
+	query = query + "INSERT INTO "+table+" VALUES('admin"+k+"@gmail.com', 'admin"+k+"', "+str(phone)+", '1234-43213-1231-12312', '"+password+"', TRUE);\n"
+
+
 f.write(query)
+
 
 table = "car"
 filename = table+".sql"
