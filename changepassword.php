@@ -13,12 +13,13 @@
     $row    = pg_fetch_assoc($result);
     if(!empty($row)){
       $pass = $_POST["old_password"];
-      // $pass = hash('sha256',$pass);
+      $pass = hash('sha256',$pass);
       if(strcmp($pass,$row["password"])==0){
         $incorrect_old = false;
         if(strcmp($_POST['new_password'],$_POST["new_password2"])==0){
           $match = true;
-          $query = "UPDATE person SET password = '".$_POST["new_password"]."' WHERE email = '$email'";
+          $pass = hash('sha256',$_POST["new_password"]);
+          $query = "UPDATE person SET password = '".$pass."' WHERE email = '$email'";
           $result = pg_query($con, $query);
           require("db_close.php");
           header("Location: profile.php");
