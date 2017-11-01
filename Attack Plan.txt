@@ -2,11 +2,3 @@ Attack Plan:
 
 adminpage
 
-change the price in the database
-Display the current price = minimum bid.
-if it’s the first bid —-> display the whats currently in the database (4)
-
-if there is a previous bid —> display price +1 .  
-
-
-	
