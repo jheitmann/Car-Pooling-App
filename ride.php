@@ -21,13 +21,14 @@
 <?php
   	// Connect to the database. Please change the password in the following line accordingly
     require("db_connect.php");?>
+    
     <div class = "container">
     <form class="form-horizontal" method="GET" action="ride.php">
 		<div class="form-group">
 		  <div class="col-md-6">
 			  <label for="origin">Departure:</label>
 			  <select class="form-control" id="origin" name="origin">
-			    <option>Select...</option>
+			    <option value="">Select...</option>
 			    <?php
 					$locations = pg_query($con, "SELECT DISTINCT origin FROM ride ORDER BY origin");
 					while($choices = pg_fetch_assoc($locations)){
@@ -44,7 +45,7 @@
 		  <div class="col-md-6">
 			  <label for="destination">Destination:</label>
 			  <select class="form-control" id="destination" name="destination">
-			    <option>Select...</option>
+			    <option value="">Select...</option>
 			    <?php
 					$locations = pg_query($con, "SELECT DISTINCT destination FROM ride ORDER BY destination");
 					while($choices = pg_fetch_assoc($locations)){
@@ -64,9 +65,9 @@
 			</div>
 			<div class = "col-md-4">
 			  <select class="form-control" id="order" name="order">
-			  	<option value="time_stamp">Date</option>
-				<option value="price">Price (lowest) </option>
-				<option value="price DESC">Price (higest) </option>
+			  	<option value="time_stamp"<?php if(isset($_GET[order]) && $_GET[order]=='time_stamp'){echo "selected";} ?>>Date</option>
+				<option value="price" <?php if(isset($_GET[order]) && $_GET[order]=='price'){echo "selected";} ?>>Price (lowest) </option>
+				<option value="price DESC" <?php if(isset($_GET[order]) && $_GET[order]=='price DESC'){echo "selected";} ?>>Price (higest) </option>
 			  </select>
 			</div>
 			<div class="col-md-4"></div>
@@ -83,10 +84,10 @@
 	<?php
 	
     $result = pg_query($con, "SELECT * FROM ride r 
-		where r.rideid NOT IN (Select c.rideid from complete_ride c)
-		AND r.origin LIKE '%".$_GET[origin]."%'
-		AND r.destination LIKE '%".$_GET[destination]."%'
-		ORDER BY ".( isset($_GET[order])? $_GET[order] :"time_stamp"));
+		where r.rideid NOT IN (Select c.rideid from complete_ride c)".
+		( isset($_GET[origin])?"AND r.origin LIKE '%".$_GET[origin]."%'":"").
+		( isset($_GET[origin])?"AND r.destination LIKE '%".$_GET[destination]."%'":"").
+		"ORDER BY ".( isset($_GET[order])? $_GET[order] :"time_stamp"));
 
 
     if (!$result) {
@@ -94,7 +95,7 @@
 			<svg width='1000' height='100'>
 				<rect x='20' y='20' rx='20' ry='20' width='900' height='80'
 				  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> There are no available rides. </text>
+				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> Error with the database </text>
 				Sorry, your browser does not support inline SVG.
 			</svg>
 		</section>
@@ -102,7 +103,7 @@
 		";
 	}
     while($row    = pg_fetch_assoc($result)){
-    	$minBid = $row['price'] + 0.05;
+    	$minBid = $row['price'];
 		echo " 
 		<div class='w3-container w3-card w3-light-grey w3-margin-bottom w3-margin-left w3-margin-right'>
 		<div class='w3-row-padding'>
@@ -122,7 +123,6 @@
 				<h5 class='w3-opacity'><b class='w3-margin-right w3-margin-left w3-text-teal'>Current price</b>".$row['price']."<i class='fa fa-dollar fa-fw w3-margin-right w3-large w3-text-black'></i></h5>
 				<div class='w3-container w3-margin-bottom'>
 					<form class='w3-container w3-card' name='newBid' action='newBid.php' method='POST'>
-					<input type='hidden' name='email' value='".$_SESSION['email']."'>
 					<input type='hidden' name='rideid' value=".$row['rideid'].">
 					<label class='w3-text-teal'>Make an offer</label>
 					<input class='w3-input' type='number' name='bid' step=0.05 min='".$minBid."' />
