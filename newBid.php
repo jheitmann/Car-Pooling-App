@@ -27,6 +27,7 @@
     if(!$update_return){
 		echo "Error: could not update data.";
     }
+    
 
 	require("db_close.php");
 	require("ride.php");

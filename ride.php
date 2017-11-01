@@ -103,7 +103,15 @@
 		";
 	}
     while($row    = pg_fetch_assoc($result)){
-    	$minBid = $row['price'];
+		$query = "SELECT * FROM bid WHERE rideid = ".$row['rideid'];
+		$bids = pg_query($con, $query);
+		
+		if(pg_num_rows($bids) == 0) {
+			$minBid = $row['price'];
+		} else {
+			$minBid = $row['price'] + 0.5;
+		}
+    	
 		echo " 
 		<div class='w3-container w3-card w3-light-grey w3-margin-bottom w3-margin-left w3-margin-right'>
 		<div class='w3-row-padding'>
@@ -120,12 +128,13 @@
 				</form>
 			</div>
 			<div class='w3-half w3-container'>
-				<h5 class='w3-opacity'><b class='w3-margin-right w3-margin-left w3-text-teal'>Current price</b>".$row['price']."<i class='fa fa-dollar fa-fw w3-margin-right w3-large w3-text-black'></i></h5>
+				<h5 class='w3-opacity'><b class='w3-margin-right w3-margin-left w3-text-teal'>Minimum Price</b>".$minBid."<i class='fa fa-dollar fa-fw w3-margin-right w3-large w3-text-black'></i></h5>
 				<div class='w3-container w3-margin-bottom'>
 					<form class='w3-container w3-card' name='newBid' action='newBid.php' method='POST'>
 					<input type='hidden' name='rideid' value=".$row['rideid'].">
+					<input type='hidden' name='min_bid' value=".$minBid.">
 					<label class='w3-text-teal'>Make an offer</label>
-					<input class='w3-input' type='number' name='bid' step=0.05 min='".$minBid."' />
+					<input class='w3-input' type='number' name='bid' step=0.5 min='".$minBid."' />
 					<div class='w3-right w3-margin-bottom'>
 						<input class='w3-btn w3-teal' type='submit' value='New Bid'>
 					</div>
