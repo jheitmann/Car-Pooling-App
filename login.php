@@ -10,9 +10,18 @@
 			$pass = hash('sha256',$pass);
 			if(strcmp($pass,$row["password"])==0){
 			  $_SESSION['email'] = $row['email'];
-			  require("db_close.php");        
-			  header("Location: index.php");
-			  exit;
+			  require("db_close.php");
+			  if(strcmp($row["is_admin"],"t") == 0){
+			  	  $_SESSION["is_admin"] = TRUE;
+			  	  require("db_close.php");        
+				  header("Location: admin.php");
+				  exit;
+			  }
+			  else{
+				  require("db_close.php");        
+				  header("Location: index.php");
+				  exit;
+			  }
 			}
 		}
 		$incorrect = true;
