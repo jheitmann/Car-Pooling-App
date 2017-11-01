@@ -37,7 +37,8 @@
 	    }
 
 		require("db_close.php");
-		require("ride.php");
+		#require("ride.php");
+		require($_POST["returnPage"]);
 	}
 ?>
  
