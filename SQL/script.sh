@@ -1,0 +1,1 @@
+cat clean.sql database.sql person.sql car.sql ride.sql bid.sql complete_ride.sql > combined.sql
