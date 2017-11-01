@@ -65,9 +65,9 @@
 			</div>
 			<div class = "col-md-4">
 			  <select class="form-control" id="order" name="order">
-			  	<option value="time_stamp">Date</option>
-				<option value="price">Price (lowest) </option>
-				<option value="price DESC">Price (higest) </option>
+			  	<option value="time_stamp"<?php if(isset($_GET[order]) && $_GET[order]=='time_stamp'){echo "selected";} ?>>Date</option>
+				<option value="price" <?php if(isset($_GET[order]) && $_GET[order]=='price'){echo "selected";} ?>>Price (lowest) </option>
+				<option value="price DESC" <?php if(isset($_GET[order]) && $_GET[order]=='price DESC'){echo "selected";} ?>>Price (higest) </option>
 			  </select>
 			</div>
 			<div class="col-md-4"></div>
