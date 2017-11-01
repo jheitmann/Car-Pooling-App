@@ -126,15 +126,29 @@ $bestBid = pg_fetch_assoc($bids);
 					<h5 class='w3-xlarge'><g>Starting Price = </g><i class='w3-text-blue'>".$ride['price']."</i></h5>
 					<hr>";
 			}
-			if(!$current_best){
-				echo "
-					<form class='w3-container' action='newBid.php'>
+			if(!$current_best){ // Add the action here!!! And we need to define minbid
+				
+				if(!$bestBid) {    	// $ride instead of $row
+					$minBid = $ride['price'];
+				} else {
+					$minBid = $ride['price'] + 0.5;
+				}
+
+				echo " 
+					<form class='w3-container' name='newBid' action='newBid.php' method='POST'>
+
+					<input type='hidden' name='rideid' value=".$ride['rideid'].">
+					<input type='hidden' name='min_bid' value=".$minBid.">
+
+					<input type='hidden' type='text' name='returnPage' value='rideDetails.php'>
+
 					<p><b class='w3-text-black'>Make an offer</b></p>
-					<input class='w3-input' type='text' placeholder='Price' name='price'>
-					<button class='w3-bar w3-teal'>BID</button>
+					<input class='w3-input' type='number' placeholder='Price' name='bid' step=0.5 min='".$minBid."' />
+					<input class='w3-btn w3-teal' type='submit' value='New Bid'>
 				  <br></form>
 				  <br>
-				";
+				"; //	<input class='w3-input' type='text' placeholder='Price'>	<button class='w3-bar w3-teal'>BID</button> 
+
 			}
 			echo "</div><div class='w3-third'>
 			<table class='w3-table w3-striped'>
