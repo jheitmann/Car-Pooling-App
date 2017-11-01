@@ -3,7 +3,8 @@ CREATE TABLE person (
 	name VARCHAR(64) NOT NULL,
 	phone NUMERIC NOT NULL,	-- UNIQUE,
 	creditcard VARCHAR(64),
-	password VARCHAR(64) NOT NULL
+	password VARCHAR(64) NOT NULL,
+	is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE car(
@@ -11,11 +12,11 @@ CREATE TABLE car(
 	model VARCHAR(64) NOT NULL,
 	color VARCHAR(64) NOT NULL,
 	capacity NUMERIC NOT NULL,
-	owner VARCHAR(64) REFERENCES person(email)
+	owner VARCHAR(64) REFERENCES person(email) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE ride(
-	carid VARCHAR(64) REFERENCES car(carid),
+	carid VARCHAR(64) REFERENCES car(carid) ON UPDATE CASCADE ON DELETE CASCADE,
 	time_stamp TIMESTAMP,
 	origin VARCHAR(64) NOT NULL,
 	destination VARCHAR(64) NOT NULL,
@@ -25,9 +26,9 @@ CREATE TABLE ride(
 );
 
 CREATE TABLE bid(
-	client VARCHAR(64) REFERENCES person(email),
+	client VARCHAR(64) REFERENCES person(email) ON UPDATE CASCADE ON DELETE CASCADE,
 	bid_price NUMERIC NOT NULL,
-	rideid NUMERIC REFERENCES ride(rideid),
+	rideid NUMERIC REFERENCES ride(rideid) ON UPDATE CASCADE ON DELETE CASCADE,
 	-- carid VARCHAR(64),
 	-- time_stamp TIMESTAMP,
 	-- FOREIGN KEY(carid,time_stamp) REFERENCES ride(carid,time_stamp),
@@ -35,9 +36,10 @@ CREATE TABLE bid(
 );
 
 CREATE TABLE complete_ride(
-	client VARCHAR(64) REFERENCES person(email),
+	client VARCHAR(64) REFERENCES person(email) ON UPDATE CASCADE ON DELETE CASCADE,
 	final_price NUMERIC NOT NULL,
-	rideid NUMERIC REFERENCES ride(rideid) PRIMARY KEY
+	rideid NUMERIC REFERENCES ride(rideid) ON UPDATE CASCADE ON DELETE CASCADE,
+	PRIMARY KEY(rideid)
 	-- carid VARCHAR(64),
 	-- time_stamp TIMESTAMP,
 	-- FOREIGN KEY(carid,time_stamp) REFERENCES ride(carid,time_stamp),
