@@ -123,7 +123,6 @@
 				<h5 class='w3-opacity'><b class='w3-margin-right w3-margin-left w3-text-teal'>Current price</b>".$row['price']."<i class='fa fa-dollar fa-fw w3-margin-right w3-large w3-text-black'></i></h5>
 				<div class='w3-container w3-margin-bottom'>
 					<form class='w3-container w3-card' name='newBid' action='newBid.php' method='POST'>
-					<input type='hidden' name='email' value='".$_SESSION['email']."'>
 					<input type='hidden' name='rideid' value=".$row['rideid'].">
 					<label class='w3-text-teal'>Make an offer</label>
 					<input class='w3-input' type='number' name='bid' step=0.05 min='".$minBid."' />
