@@ -59,6 +59,12 @@
 			  </select>
 		  </div>
 		</div>
+		<div class="form-group">
+		  <div class="col-md-6">
+			  <label for="date">Date:</label>
+			  <input class="w3-input w3-border w3-round" type="date" placeholder="Date..." name="date">
+		  </div>
+		</div>
 		<div class = "form-group">
 			<div class = "col-md-1">
 			  <label for="order">Sort By:</label>
@@ -82,11 +88,13 @@
 	
 	<!-- QUERY AND PRINT RESULT -->
 	<?php
+	$date_set =isset($_GET[date]) &&  $_GET[date]!="" ;
 	
     $result = pg_query($con, "SELECT * FROM ride r 
-		where r.rideid NOT IN (Select c.rideid from complete_ride c)".
-		( isset($_GET[origin])?"AND r.origin LIKE '%".$_GET[origin]."%'":"").
-		( isset($_GET[origin])?"AND r.destination LIKE '%".$_GET[destination]."%'":"").
+		where r.rideid NOT IN (Select c.rideid from complete_ride c) ".
+		( isset($_GET[origin])?"AND r.origin LIKE '%".$_GET[origin]."%' ":"").
+		( isset($_GET[destination])?"AND r.destination LIKE '%".$_GET[destination]."%' ":"").
+		($date_set?"AND DATE(r.time_stamp)='".$_GET[date]."' ":"").
 		"ORDER BY ".( isset($_GET[order])? $_GET[order] :"time_stamp"));
 
 
@@ -95,7 +103,7 @@
 			<svg width='1000' height='100'>
 				<rect x='20' y='20' rx='20' ry='20' width='900' height='80'
 				  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> Error with the database </text>
+				<text x='60' y='70' font-family='Verdana' font-size='30' fill='red'> Error with the database </text>
 				Sorry, your browser does not support inline SVG.
 			</svg>
 		</section>

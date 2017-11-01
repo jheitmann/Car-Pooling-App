@@ -128,9 +128,9 @@ $bestBid = pg_fetch_assoc($bids);
 			}
 			if(!$current_best){
 				echo "
-					<form class='w3-container' action="./*TODO*/">
+					<form class='w3-container' action='newBid.php'>
 					<p><b class='w3-text-black'>Make an offer</b></p>
-					<input class='w3-input' type='text' placeholder='Price'>
+					<input class='w3-input' type='text' placeholder='Price' name='price'>
 					<button class='w3-bar w3-teal'>BID</button>
 				  <br></form>
 				  <br>
