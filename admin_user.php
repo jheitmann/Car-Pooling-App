@@ -4,7 +4,7 @@
     require("db_connect.php");
     echo "<p></p>";
     
-    $users = pg_query($con, "SELECT * FROM person ORDER BY email;");
+	    $users = pg_query($con, "SELECT * FROM person ORDER BY email;");
     if (pg_num_rows($users) == 0) { 
 		echo " <section>
 			<svg width='1000' height='100'>
@@ -29,11 +29,11 @@
 		        <th>Credit Card</th>
 		        <th>Clearance</th>
 		        <th></th>
-		        <th></th>
-		        <th></th>
+		        <th colspan="2"><button class='btn btn-success' align = "center" onclick="location.href = './admin_addUser.php'">Add User</button></th>
 		      </tr>
 		    </thead>
 		    <tbody>
+		    
 		<?php
 		while($row = pg_fetch_assoc($users)){
 			echo " <tr>
@@ -47,15 +47,15 @@
 		        else{
 		        	echo "<td> Non-Admin User</td>";
 		        }
-		        echo '<td><form action = "admin_resetpassword.php" method="POST">
+		        echo '<td><form action = "admin_resetpassword.php" method="GET">
 		  	<input type = "hidden" name = "email" value = "'.$row["email"].'">
 		  	  <button type="submit" class="btn">Reset Password</button>
 		  </form></td>';
-		  		echo '<td><form action = "admin_modifyuser.php" method="POST">
+		  		echo '<td><form action = "admin_modifyuser.php" method="GET">
 		  	<input type = "hidden" name = "email" value = "'.$row["email"].'">
 		  	  <button type="submit" class="btn">Modify</button>
 		  </form></td>';
-		  		echo '<td><form action = "admin_deleteuser.php" method="POST">
+		  		echo '<td><form action = "admin_deleteuser.php" method="GET">
 		  	<input type = "hidden" name = "email" value = "'.$row["email"].'">
 		  	  <button type="submit" class="btn btn-danger">Delete</button>
 		  </form></td>';
@@ -69,9 +69,6 @@
 	} 
     
     require("db_close.php");
-?>
-
-	
+?>	
 </body>
-
 </html>

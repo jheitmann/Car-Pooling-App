@@ -1,18 +1,34 @@
 <?php require('header2.php');?>
-
 <?php
-    if(!empty($_POST)){
+    if(!empty($_GET)){
       require("db_connect.php");
-      $email = $_POST["email"];
+      $email = $_GET["email"];
+      $query = "SELECT * FROM person WHERE email = '$email'";
+      $result = pg_query($con, $query);
+      $row    = pg_fetch_assoc($result);
     }
-    require("db_connect.php");
-    $query = "SELECT * FROM person WHERE email = '$email'";
-    $result = pg_query($con, $query);
-    $row    = pg_fetch_assoc($result);
+    elseif(!empty($_POST)){
+      require("db_connect.php");
+      $email = $_POST["old_email"];
+      if(strcmp($_POST["is_admin"],"yes")==0){
+        $query = "UPDATE person SET email = '".$_POST["email"]."', name = '".$_POST["name"]."', phone = '".$_POST["phone"]."', creditcard = '".$_POST["creditcard"]."', is_admin = TRUE WHERE email = '$email';";
+      }
+      else{
+        $query = "UPDATE person SET email = '".$_POST["email"]."', name = '".$_POST["name"]."', phone = '".$_POST["phone"]."', creditcard = '".$_POST["creditcard"]."', is_admin = FALSE WHERE email = '$email';";
+      }
+      $result = pg_query($con, $query);
+      require("db_close.php");
+      header("Location: admin_user.php");
+      exit;
+    }
+    else{
+      echo "INVALID ACCESS";
+      exit;
+    }
 ?>
 
 <div class="container">
-    <form class="form-horizontal" method="POST" action="admin_modifyuser2.php">
+    <form class="form-horizontal" method="POST" action="admin_modifyuser.php">
       <div class="form-group">
         <label for="email">Email:</label>
         <?php echo '<input name="email" type="email" class="form-control" id="email" value = "'.$row["email"].'"required>'; ?>
