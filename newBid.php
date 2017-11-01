@@ -7,8 +7,17 @@
 
 
 	require("db_connect.php");
+	
+	$query = "SELECT * FROM bid WHERE rideid = ".$_POST["rideid"];
+	$bids = pg_query($con, $query);
+		
+	if(pg_num_rows($bids) == 0) {
+		$minBid = $row['price'];
+	} else {
+		$minBid = $row['price'] + 0.5;
+	}
 
-	if($_POST["min_bid"] <= $_POST["bid"]){
+	if($minBid <= $_POST["bid"]){
 		$checkBid = "SELECT * FROM bid WHERE client='".$_SESSION['email']."' AND rideid=".$_POST["rideid"];
 		$check = pg_query($con,$checkBid);
 		

@@ -131,7 +131,6 @@
 		
 				<form class='w3-container w3-margin-bottom' name='rideDetails' action='rideDetails.php' method='POST'>
 				<input type='hidden' name='rideid' value='".$row['rideid']."' />
-				<input type='hidden' name='min_bid' value=".$minBid." />
 				<div class='w3-center'>
 				<button class='w3-button w3-small w3-white w3-border w3-border-teal w3-round-small' type='submit' value='s'>Details</button>
 				</div>
@@ -142,8 +141,7 @@
 				<div class='w3-container w3-margin-bottom'>
 					<form class='w3-container w3-card' name='newBid' action='newBid.php' method='POST'>
 					<input type='hidden' name='rideid' value=".$row['rideid'].">
-					<input type='hidden' type='text' name='returnPage' value='ride.php'>			
-					<input type='hidden' name='min_bid' value=".$minBid.">
+					<input type='hidden' type='text' name='returnPage' value='ride.php'>
 					<label class='w3-text-teal'>Make an offer</label>
 					<input class='w3-input' type='number' name='bid' step=0.5 min='".$minBid."' />
 					<div class='w3-right w3-margin-bottom'>
