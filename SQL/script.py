@@ -1,3 +1,7 @@
+def hash_func(password):
+	import hashlib
+	return hashlib.sha256(password).hexdigest()
+
 import random
 table = "person"
 filename = table+".sql"
@@ -6,7 +10,8 @@ query = ""
 for i in range(100):
 	k = str(i)
 	phone = random.randint(1000000000,9999999999)
-	query = query + "INSERT INTO "+table+" VALUES('user"+k+"@gmail.com', 'user"+k+"', "+str(phone)+", '1234-43213-1231-12312', 'pass"+k+"');\n"
+	password = hash_func("pass"+k)
+	query = query + "INSERT INTO "+table+" VALUES('user"+k+"@gmail.com', 'user"+k+"', "+str(phone)+", '1234-43213-1231-12312', '"+password+"');\n"
 f.write(query)
 
 table = "car"

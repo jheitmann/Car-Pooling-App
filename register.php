@@ -11,7 +11,7 @@
       $repass = $_POST["password_again"];
       if(strcmp($pass,$repass)==0){
         $pass_match = true;
-        // $pass = hash('sha256',$pass);
+        $pass = hash('sha256',$pass);
         $query = "INSERT INTO person VALUES('".$_POST["email"]."', '".$_POST["name"]."', ".
                   $_POST["phone"].", '".$_POST["credit_number"]."', '".$pass."')";
         $result = pg_query($con, $query);

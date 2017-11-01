@@ -7,7 +7,7 @@
 		$row    = pg_fetch_assoc($result);
 		if(!empty($row)){
 			$pass = $_POST["password"];
-			// $pass = hash('sha256',$pass);
+			$pass = hash('sha256',$pass);
 			if(strcmp($pass,$row["password"])==0){
 			  $_SESSION['email'] = $row['email'];
 			  require("db_close.php");        
