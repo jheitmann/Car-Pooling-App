@@ -1,87 +1,8 @@
 Attack Plan:
 
-SQL:
-TABLE bid(): rideID, ClientID, bid. Stores All the the bids!! Ever!!!
+adminpage
 
-TABLE completed_ride(): rideID, clientID, final_price
-
-
-PHP:
-- Create the following pages:
-
-1) Common for driver and client:
-	
-	db_connect.php
-		Connects to database and the variable is "$con"
-
-	db_close.php
-		Closes connection and sets $con to NULL
-
-	index.php
-		Just a home page.
-	
-	login.php
-		uses "loginpage.php" as help
-		if login is successful
-		starts a session and sets a session variable - the email.
-		In all following pages we check if the session variable is set.
-
-	register.php
-		uses "registerpage.php" as help
-		Takes credentials and creates a new person in database. 
-		Throws an error if it’s already there.
-
-2) For Client:
-
-	ride.php
-		Page that calls the database and displays all the available rides.
-			(All rides that are not in TABLE completed_rides)
-
-		You can click on any ride to get details of it ("particularride.php")
-		
-		You can see the current ”highest bid” on each ride and choose to up it.
-
-	particularride.php
-		Simple page, displays the full information of a particular ride.
-
-		You can see the current ”highest bid” on each ride and choose to up it.
-	
-	completedRides.php
-		displays all the ”completed rides” for a given client.
-		NOTE: Completed here means all booked rides.
-
-	myBids.php
-		Compare the bids I did with the highest bid for the rides. (Can change my bid)
-
-3) For Driver:
-	
-	addcar.php
-		--Not sure if it will be different page or not
-		Form which takes all car details and add in database.
-
-	myRides.php
-		Checks with the sessionEmail.
-		Displays all rides where this user is set as the ”driver”. 	
-		There he can see the highest current bid on his drive.
-		There he can choose to ”accept” or ”lock in” that ride.
-			-Which will add the ride with its current price to ”completed rides”.
-		
-		(We only keep track of the highest bid and the user that put the highest bid)
-
-	offerRide.php
-		User can create a ride with him as a driver and set information, car etc…
-		Then he sets a starting price on his ride.
-		-> change ride table, rideid not necessary, select date box, eventually display 
-		   model next to carid, check price and date (local time?)
-
-		(adding a new entry to the ride Table, with client being null, and a min-price that the creator sets.)
-
-
-adminPage.php
-	where admins can login in. Or only admins can access.
-
-	Displays all 4 pages.
-	Options to fuck them up however the admin desires.
+change the price in the database
 
 
 	
