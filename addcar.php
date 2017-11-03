@@ -37,7 +37,7 @@
 <body>
   	
   <!-- Navigation -->
-  <?php require('header.html');  ?>
+  <?php require('header.php');  ?>
 
 
   <div class="container">

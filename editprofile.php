@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="w3.css">
 <body>
   <!-- Navigation -->
-  <?php require('header.html');
+  <?php require('header.php');
         require("db_connect.php");
         $email = $_SESSION["email"];
         $query = "SELECT * FROM person WHERE email = '$email'";

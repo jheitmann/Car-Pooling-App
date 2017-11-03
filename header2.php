@@ -32,7 +32,10 @@
       <li><a href="admin_car.php">Cars</a></li>
       <li><a href="admin_ride.php">Rides</a></li>
       <li><a href="admin_bid.php">Bids</a></li>
-	  <li><a href="logout.php">Logout</a></li>
+      <li><a href="logout.php">Logout</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="index.php">Home</a></li>
     </ul>
   </div>
 </nav>

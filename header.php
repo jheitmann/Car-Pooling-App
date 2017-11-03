@@ -23,5 +23,14 @@
       <li><a href="profile.php">Edit Profile</a></li>
 	  <li><a href="logout.php">Logout</a></li>
     </ul>
+    <?php
+      if(isset($_SESSION['is_admin'])){
+    ?>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="admin.php">Admin</a></li>
+    </ul>
+    <?php
+      }
+    ?>
   </div>
 </nav>

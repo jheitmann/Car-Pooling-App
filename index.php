@@ -14,7 +14,7 @@
 <body>
 	
 <!-- Navigation -->
-<?php require('header.html'); ?>
+<?php require('header.php'); ?>
 
 <!-- Slide Show -->
 <section>

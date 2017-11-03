@@ -14,7 +14,7 @@
 <body>
 	
 <!-- Navigation -->
-<?php require('header.html');
+<?php require('header.php');
   session_start();
   $email = $_SESSION['email']; 
   require('db_connect.php');

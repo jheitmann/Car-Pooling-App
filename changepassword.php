@@ -49,7 +49,7 @@
 <body>
   
 <!-- Navigation -->
-<?php require('header.html');?>  
+<?php require('header.php');?>  
   <div class="container">
       <form class="form-horizontal" method="POST" action="changepassword.php">
         <div class="form-group">

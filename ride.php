@@ -16,7 +16,7 @@
 <body>
 	
 <!-- Navigation -->
-<?php require('header.html'); ?>
+<?php require('header.php'); ?>
 
 <?php
   	// Connect to the database. Please change the password in the following line accordingly

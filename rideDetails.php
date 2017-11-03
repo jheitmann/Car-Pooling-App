@@ -16,7 +16,7 @@
 <body class="w3-light-grey">
 	
 <!-- Navigation -->
-<?php require('header.html'); ?>
+<?php require('header.php'); ?>
 
 <?php require("db_connect.php");?>
 

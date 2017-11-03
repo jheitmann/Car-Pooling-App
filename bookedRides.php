@@ -15,7 +15,7 @@
 <body>
 	
 <!-- Navigation -->
-<?php require('header.html'); ?>
+<?php require('header.php'); ?>
 
 <?php
     require("db_connect.php");
