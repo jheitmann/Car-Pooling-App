@@ -7,7 +7,7 @@
 
 	require("db_connect.php");
 	
-	$query = "SELECT * FROM ride_price WHERE rideid = ".$_POST["rideid"];
+	$query = "SELECT price, bid_price FROM ride_price WHERE rideid = ".$_POST["rideid"];
 	$result = pg_query($con, $query);
 		
 	if(pg_num_rows($noBid) == 0) {

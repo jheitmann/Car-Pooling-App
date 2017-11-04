@@ -105,16 +105,16 @@
 				There are no available rides
 			  </div>';
 	}
-    while($row    = pg_fetch_assoc($result)){
-		$query = "SELECT * FROM bid WHERE rideid = ".$row['rideid'];
-		$bids = pg_query($con, $query);
+    while($row = pg_fetch_assoc($result)){
 		
-		if(pg_num_rows($bids) == 0) {
-			$minBid = $row['price'];
+		$query = "SELECT price, bid_price FROM ride_price WHERE rideid = ".$row['rideid'];
+		$ride_price = pg_fetch_assoc(pg_query($con, $query));
+		if(is_null($ride_price['bid_price'])) {
+			$minBid = $ride_price['price'];
 		} else {
-			$minBid = $row['price'] + 0.5;
+			$minBid = $ride_price['bid_price'] + 0.5;
 		}
-    	
+		
 		echo " 
 		<div class='w3-container w3-card w3-light-grey w3-margin-bottom w3-margin-left w3-margin-right'>
 		<div class='w3-row-padding'>
@@ -137,7 +137,6 @@
 					<input type='hidden' name='rideid' value=".$row['rideid'].">
 					<input type='hidden' type='text' name='returnPage' value='ride.php'>
 					<label class='w3-text-teal'>Make an offer</label>
-					<input class='w3-input' type='number' name='bid' step=0.5 min='".$minBid."' />
 					<div class='w3-right w3-margin-bottom'>
 						<input class='w3-btn w3-teal' type='submit' value='New Bid'>
 					</div>
