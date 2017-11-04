@@ -4,10 +4,10 @@
     require("db_connect.php");
     echo "<p></p>";
     
-    $users = pg_query($con, "SELECT car.owner, r.origin, r.destination, r.time_stamp, r.price, c.client, r.rideid
-    FROM car,ride r LEFT OUTER JOIN complete_ride c ON r.rideid=c.rideid 
+    $rides = pg_query($con, "SELECT car.owner, r.origin, r.destination, r.time_stamp, r.price, c.client, r.rideid, r.bid_price
+    FROM car,ride_price r LEFT OUTER JOIN complete_ride c ON r.rideid=c.rideid 
     WHERE car.carid=r.carid ORDER BY r.time_stamp;");
-    if (pg_num_rows($users) == 0) { 
+    if (pg_num_rows($rides) == 0) { 
 		echo '<div class="error-msg">
 				<i class="fa fa-times-circle"></i>
 				There are no rides
@@ -32,13 +32,13 @@
 		    </thead>
 		    <tbody>
 		<?php
-		while($row = pg_fetch_assoc($users)){
+		while($row = pg_fetch_assoc($rides)){
 			echo " <tr>
 				<td>".$row['owner']."</td>
 		        <td>".$row['origin']."</td>
 		        <td>".$row['destination']."</td>
 		        <td>".$row['time_stamp']."</td>
-		        <td>".$row['price']." $</td>";
+		        <td>".(($row['bid_price'])?$row['bid_price']:$row['price'])." $</td>";
 		        if($row['client']){
 		        	echo "<td style='background-color:green'> Completed </td>
 							<td>".$row['client']."</td>";

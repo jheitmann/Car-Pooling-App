@@ -131,7 +131,7 @@ $bestBid = pg_fetch_assoc($bids);
 				if(!$bestBid) {    	// $ride instead of $row
 					$minBid = $ride['price'];
 				} else {
-					$minBid = $ride['price'] + 0.5;
+					$minBid = $bestBid['bid_price'] + 0.5;
 				}
 
 				echo " 
