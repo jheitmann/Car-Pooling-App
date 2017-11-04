@@ -24,8 +24,8 @@
     require("db_connect.php");
     echo "<p></p>";
     
-    $rides = pg_query($con, "SELECT * FROM ride, bid WHERE bid.client = '" . $_SESSION['email'] . "' AND ride.rideid = bid.rideid
-						ORDER BY ride.time_stamp DESC");
+    $rides = pg_query($con, "SELECT * FROM ride_price, bid WHERE bid.client = '" . $_SESSION['email'] . "' AND ride_price.rideid = bid.rideid
+						ORDER BY ride_price.time_stamp DESC");
     
     if (pg_num_rows($rides) == 0) { 
 		echo '<div class="error-msg">
@@ -75,7 +75,7 @@
 		        <td>".$row['destination']."</td>
 		        <td>".$row['time_stamp']."</td>
 		        <td>$ ".$yourprice."</td>
-		        <td>$ ".$row['price']."</td>";
+		        <td>$ ".($row['bid_price']?$row['bid_price']:$row['price'])."</td>";
 		    echo '<td><form action = "rideDetails.php" method="POST">
 		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">';
 
