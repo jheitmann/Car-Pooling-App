@@ -137,6 +137,7 @@
 					<input type='hidden' name='rideid' value=".$row['rideid'].">
 					<input type='hidden' type='text' name='returnPage' value='ride.php'>
 					<label class='w3-text-teal'>Make an offer</label>
+					<input class='w3-input' type='number' name='bid' step=0.5 min='".$minBid."' />
 					<div class='w3-right w3-margin-bottom'>
 						<input class='w3-btn w3-teal' type='submit' value='New Bid'>
 					</div>

@@ -10,7 +10,7 @@
 	$query = "SELECT price, bid_price FROM ride_price WHERE rideid = ".$_POST["rideid"];
 	$result = pg_query($con, $query);
 		
-	if(pg_num_rows($noBid) == 0) {
+	if(pg_num_rows($result) == 0) {
 		echo "Error: rideid not valid.";
 	} else {
 		$ride_price = pg_fetch_assoc($result);
@@ -25,12 +25,26 @@
 				}
 			} 
 		} else {
-			if($_POST["bid"] > $ride_price['bid_price']) {
-				$updateBid = "UPDATE bid SET bid_price = '".$_POST["bid"]."' WHERE client='".$_SESSION['email']."' AND rideid = '".$_POST["rideid"]."'";
+			$query = "SELECT * FROM bid WHERE rideid = ".$_POST["rideid"]." AND client = '".$_SESSION['email']."'";
+			$result = pg_query($con, $query);
+			if(pg_num_rows($result) == 0) {
+				if($_POST["bid"] > $ride_price['bid_price']) {
+					$insertBid = "INSERT INTO bid VALUES('".$_SESSION['email']."', ".$_POST["bid"].", ".$_POST["rideid"].") ";
 
-				$update_return = pg_query($con, $updateBid);
-				if(!$update_return){
-					echo "Error: could not update Bid.";
+					$insert_return = pg_query($con, $insertBid);
+					if(!$insert_return){
+						echo $insertBid;
+						echo "Error: could not insert Bid.";
+					}
+				}
+			} else {
+				if($_POST["bid"] > $ride_price['bid_price']) {
+					$updateBid = "UPDATE bid SET bid_price = '".$_POST["bid"]."' WHERE client='".$_SESSION['email']."' AND rideid = '".$_POST["rideid"]."'";
+
+					$update_return = pg_query($con, $updateBid);
+					if(!$update_return){
+						echo "Error: could not update Bid.";
+					}
 				}
 			}
 		}
