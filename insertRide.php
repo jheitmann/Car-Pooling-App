@@ -6,7 +6,7 @@
 	$row = pg_fetch_assoc($max);
 	$datetime = str_replace("/","-",$_POST["datetime"]);
 	$datetime = $datetime.":00";
-	$insert = "INSERT INTO ride VALUES('".$_POST["carid"]."', '".$datetime."', '".$_POST["origin"]."', '". $_POST["destination"]."', ".$_POST["min"].".00, ".$row["max_id"].")";
+	$insert = "INSERT INTO ride VALUES('".$_POST["carid"]."', '".$datetime."', '".$_POST["origin"]."', '". $_POST["destination"]."', ".$_POST["min"].", ".$row["max_id"].")";
     $insert_return = pg_query($con, $insert);
 
     if(!$insert_return){
