@@ -80,13 +80,13 @@
 		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">';
 
 		        if(strcmp($status, "PENDING")==0){
-		        	echo '<button type="submit" class="btn">BID MORE</button>';
+		        	echo '<button type="submit" class="btn btn-block">BID MORE</button>';
 		        }
 		        elseif (strcmp($status, "APPROVED")==0) {
-					echo "<button type='submit' class='btn btn-success'>APPROVED</button>";
+					echo "<button type='submit' class='btn btn-success btn-block'>APPROVED</button>";
 		        }
 		        elseif (strcmp($status, "REJECTED")==0) {
-		        	echo "<button type='submit' class='btn btn-danger'>REJECTED</button>";
+		        	echo "<button type='submit' class='btn btn-danger btn-block'>REJECTED</button>";
 		        }
 			echo " </form></td></tr>";
 		}
