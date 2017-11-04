@@ -100,16 +100,10 @@
 
 
     if (!$result) {
-		echo " <section>
-			<svg width='1000' height='100'>
-				<rect x='20' y='20' rx='20' ry='20' width='900' height='80'
-				  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-				<text x='60' y='70' font-family='Verdana' font-size='30' fill='red'> Error with the database </text>
-				Sorry, your browser does not support inline SVG.
-			</svg>
-		</section>
-		
-		";
+		echo '<div class="error-msg">
+				<i class="fa fa-times-circle"></i>
+				There are no available rides
+			  </div>';
 	}
     while($row    = pg_fetch_assoc($result)){
 		$query = "SELECT * FROM bid WHERE rideid = ".$row['rideid'];
