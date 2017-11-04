@@ -54,17 +54,21 @@
 		while($row = pg_fetch_assoc($allRides)){
 			$query = "SELECT * FROM complete_ride WHERE rideid = ".$row['rideid'];
 			$completed_rides = pg_query($con,$query);
-			$query = "SELECT * FROM bid WHERE rideid = ".$row['rideid'];
-			$bids = pg_query($con,$query);
+			$query = "SELECT price, bid_price FROM ride_price WHERE rideid = ".$row['rideid'];
+			$view_query = pg_query($con,$query);
+			$ride_price = pg_fetch_assoc($view_query);
 			if(pg_num_rows($completed_rides) == 0){
-				if(pg_num_rows($bids) == 0) {
+				if(is_null($ride_price['bid_price'])) {
 					$status = "PENDING";
+					$price = $row['price'];
 				} else {
 					$status = "ACCEPT";
+					$price = $ride_price['bid_price'];
 				}
 			}
 			else{
 				$status = "COMPLETED";
+				$price = $ride_price['bid_price'];
 			}
 			echo " <tr>
 		        <td>".$row['origin']."</td>
@@ -72,7 +76,7 @@
 		        <td>".$row['time_stamp']."</td>";
 		        
 		        if(strcmp($status, "ACCEPT")==0){
-					echo "<td>".$row['price']."</td>";
+					echo "<td>".$price."</td>";
 		        	echo '<td><form action = "acceptRide.php" method="POST">
 		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">
 		  	  <button type="submit" class="btn btn-block">ACCEPT</button>
