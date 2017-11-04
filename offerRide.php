@@ -22,18 +22,10 @@
 
 	$cars = pg_query($con, "SELECT car.model, car.carid FROM car WHERE car.owner = '" . $_SESSION['email'] . "'");
 	if (pg_num_rows($cars) == 0) {
-
-		?>
-		<section>
-			<svg width='1000' height='100'>
-				<rect x='20' y='20' rx='20' ry='20' width='900' height='80'
-				  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> You need to add a car to your profile first. </text>
-				Sorry, your browser does not support inline SVG.
-			</svg>
-		</section>
-
-		<?php
+		echo '<div class="error-msg">
+				<i class="fa fa-times-circle"></i>
+				You need to add a car to your profile first
+			  </div>';
 	}
 	else{
 		?>
