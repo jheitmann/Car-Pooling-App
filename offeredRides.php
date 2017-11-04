@@ -30,16 +30,10 @@
 								   ORDER BY r.time_stamp DESC");	
 									   
     if (pg_num_rows($allRides) == 0) { 
-		echo " <section>
-			<svg width='1000' height='100'>
-				<rect x='20' y='20' rx='20' ry='20' width='900' height='80'
-				  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> You do not have any active rides. </text>
-				Sorry, your browser does not support inline SVG.
-			</svg>
-		</section>
-		
-		";
+		echo '<div class="error-msg">
+				<i class="fa fa-times-circle"></i>
+				You did not offer a ride
+			  </div>';
 	} else {
 		?>
 

@@ -6,16 +6,10 @@
     
 	$cars = pg_query($con, "SELECT * FROM car ORDER BY carid;");
     if (pg_num_rows($cars) == 0) { 
-		echo " <section>
-			<svg width='1000' height='100'>
-				<rect x='20' y='20' rx='20' ry='20' width='900' height='80'
-				  style='fill:gray;stroke:black;stroke-width:5;opacity:0.5' />
-				<text x='60' y='70' font-family='Verdana' font-size='30' fill='blue'> No cars found </text>
-				Sorry, your browser does not support inline SVG.
-			</svg>
-		</section>
-		
-		";
+		echo '<div class="error-msg">
+				<i class="fa fa-times-circle"></i>
+				There are no cars
+			  </div>';
 	} else {
 		?>
 
