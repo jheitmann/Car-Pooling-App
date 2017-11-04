@@ -106,9 +106,9 @@ $bestBid = pg_fetch_assoc($bids);
 				echo "<h3 class='w3-opacity'><b>Your accepted the offer:</b></h3>";
 				echo '<div class="w3-white w3-text-grey w3-card-4">
           <div class="w3-container">
-          <p class="w3-large"><b><i class="fa fa-dollar fa-fw w3-margin-right w3-text-teal"> Price : </i>'.$complete['final_price'].'</b></p>
+          <p class="w3-large"><b><i class="fa fa-dollar fa-fw w3-margin-right w3-text-teal"></i>Price : '.$complete['final_price'].'</b></p>
           <hr>
-          <p class="w3-large"><b><i class="fa fa-user fa-fw w3-margin-right w3-text-teal"> Client : </i>'.$complete['name'].'</b></p>
+          <p class="w3-large"><b><i class="fa fa-user fa-fw w3-margin-right w3-text-teal"></i>Client : '.$complete['name'].'</b></p>
           </div>
           <div class="w3-container">
           <br>
