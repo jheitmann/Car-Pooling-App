@@ -137,7 +137,6 @@ $bestBid = pg_fetch_assoc($bids);
 					<form class='w3-container' name='newBid' action='newBid.php' method='POST'>
 
 					<input type='hidden' name='rideid' value=".$ride['rideid'].">
-					<input type='hidden' name='min_bid' value=".$minBid.">
 
 					<input type='hidden' type='text' name='returnPage' value='rideDetails.php'>
 
