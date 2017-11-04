@@ -96,14 +96,14 @@ $bestBid = pg_fetch_assoc($bids);
         <!-- BIDS -->
         <div class="w3-container w3-card w3-white">
 		<?php
-		if($completed){
+		if($complete){
 			echo"
 			<h2 class='w3-text-grey w3-padding-16'><i class='fa fa-handshake-o fa-fw w3-margin-right w3-xxlarge w3-text-teal'></i>Status</h2>
 			<div class='w3-container'>";
 			if($canSee){
-				echo "<h5 class='w3-opacity'><b>Your offer was accepted by the driver for ".$complete['final_price']."$</b></h5>";
+				echo "<h3 class='w3-opacity'><b>Your offer was accepted by the driver for ".$complete['final_price']."$</b></h3>";
 			}else{
-				echo "<h5 class='w3-opacity'><b>This ride is no longer available</b></h5>";
+				echo "<h3 class='w3-opacity'><b>This ride is no longer available</b></h3>";
 			}
 			echo "</div>";
 		}else{
@@ -125,8 +125,7 @@ $bestBid = pg_fetch_assoc($bids);
 				echo "<h5 class='w3-large'>There is no bid at the moment</h5>
 					<h5 class='w3-xlarge'><g>Starting Price = </g><i class='w3-text-blue'>".$ride['price']."</i></h5>
 					<hr>";
-			}
-			if(!$current_best){ // Add the action here!!! And we need to define minbid
+			} // Add the action here!!! And we need to define minbid
 				
 				if(!$bestBid) {    	// $ride instead of $row
 					$minBid = $ride['price'];
@@ -142,14 +141,14 @@ $bestBid = pg_fetch_assoc($bids);
 
 					<input type='hidden' type='text' name='returnPage' value='rideDetails.php'>
 
-					<p><b class='w3-text-black'>Make an offer</b></p>
+					<p><b class='w3-text-black'>Make an".($current_best?" new":"")." offer</b></p>
 					<input class='w3-input' type='number' placeholder='Price' name='bid' step=0.5 min='".$minBid."' />
 					<input class='w3-btn w3-teal' type='submit' value='New Bid'>
 				  <br></form>
 				  <br>
 				"; //	<input class='w3-input' type='text' placeholder='Price'>	<button class='w3-bar w3-teal'>BID</button> 
 
-			}
+			
 			echo "</div><div class='w3-third'>
 			<table class='w3-table w3-striped'>
 			<tr>

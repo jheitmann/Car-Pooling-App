@@ -76,20 +76,19 @@
 		        <td>".$row['time_stamp']."</td>
 		        <td>$ ".$yourprice."</td>
 		        <td>$ ".$row['price']."</td>";
+		    echo '<td><form action = "rideDetails.php" method="POST">
+		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">';
 
 		        if(strcmp($status, "PENDING")==0){
-		        	echo '<td><form action = "rideDetails.php" method="POST">
-		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">
-		  	  <button type="submit" class="btn">BID MORE</button>
-		  </form></td>';
+		        	echo '<button type="submit" class="btn">BID MORE</button>';
 		        }
 		        elseif (strcmp($status, "APPROVED")==0) {
-					echo "<td><button class='btn btn-success'>APPROVED</button></td>";
+					echo "<button type='submit' class='btn btn-success'>APPROVED</button>";
 		        }
 		        elseif (strcmp($status, "REJECTED")==0) {
-		        	echo "<td><button class='btn btn-danger'>REJECTED</button></td>";
+		        	echo "<button type='submit' class='btn btn-danger'>REJECTED</button>";
 		        }
-			echo " </tr>";
+			echo " </form></td></tr>";
 		}
 		?>
 		</tbody>
