@@ -33,7 +33,7 @@
 		        <th>Status</th>
 		        <th>Client</th>
 		        <th></th>
-		        <th></th>
+		       <th colspan="2"><button class='btn btn-success' align = "center" onclick="location.href = './admin_addride.php'">Add Ride</button></th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -44,7 +44,7 @@
 		        <td>".$row['origin']."</td>
 		        <td>".$row['destination']."</td>
 		        <td>".$row['time_stamp']."</td>
-		        <td>".$row['price']."</td>";
+		        <td>".$row['price']." $</td>";
 		        if($row['client']){
 		        	echo "<td style='background-color:green'> Completed </td>
 							<td>".$row['client']."</td>";
@@ -53,7 +53,7 @@
 		        	echo "<td style='background-color:orange'> Pending </td>
 							<td> ... </td>";
 		        }
-		  		echo '<td><form action = "admin_modifyride.php" method="POST">
+		  		echo '<td><form action = "admin_modifyride.php" method="GET">
 		  	<input type = "hidden" name = "rideid" value = "'.$row["rideid"].'">
 		  	  <button type="submit" class="btn">Modify</button>
 		  </form></td>';
