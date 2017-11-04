@@ -27,7 +27,7 @@
 		        <th>Status</th>
 		        <th>Client</th>
 		        <th></th>
-		       <th colspan="2"><button class='btn btn-success' align = "center" onclick="location.href = './admin_addride.php'">Add Ride</button></th>
+		       <th colspan="2"><button class='btn btn-success' align = "center" onclick="location.href = './admin_addRide.php'">Add Ride</button></th>
 		      </tr>
 		    </thead>
 		    <tbody>

@@ -9,6 +9,7 @@
       
       $query = "SELECT * FROM car";
       $cars = pg_query($con, $query);
+      require("db_close.php");
     }
     elseif(!empty($_POST)){
       require("db_connect.php");
@@ -21,6 +22,7 @@
     }
     else{
       echo "INVALID ACCESS";
+      require("db_close.php");
       exit;
     }
 ?>
