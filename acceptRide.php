@@ -2,12 +2,11 @@
 
 	require("db_connect.php");
 	
-	$query = "SELECT * FROM bid WHERE bid.rideid = ".$_POST["rideid"]." AND bid.bid_price >= 
-				ALL(SELECT ride.price FROM ride WHERE ride.rideid = ".$_POST["rideid"].")";
+	$query = "SELECT client FROM ride_price WHERE rideid = ".$_POST["rideid"];
 	$ride = pg_query($con, $query);
 	$row = pg_fetch_assoc($ride);
 	
-	$insert = "INSERT INTO complete_ride VALUES('".$row["client"]."', ".$row["bid_price"].", ".$row["rideid"].")";
+	$insert = "INSERT INTO complete_ride VALUES(".$_POST["rideid"].", '".$row["client"]."')";
     $insert_return = pg_query($con, $insert);
 
     if(!$insert_return){
