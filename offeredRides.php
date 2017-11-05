@@ -88,7 +88,7 @@
 		  	<input type = 'hidden' name = 'rideid' value = '".$row['rideid']."'><button type='submit' class='btn btn-danger btn-block'>PENDING</button></form></td>";
 		        }
 		        else {
-					echo "<td>".$row['price']."</td>";
+					echo "<td>".$price."</td>";
 					echo "<td><form action = 'rideDetails.php' method='POST'>
 		  	<input type = 'hidden' name = 'rideid' value = '".$row['rideid']."'><button type='submit'class='btn btn-success btn-block'>COMPLETED</button></form></td>";
 				}
