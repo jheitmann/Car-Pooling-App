@@ -65,5 +65,40 @@
       </div>
     </form> 
   </div>
+
+  
+  <?php
+    require("db_connect.php");
+    echo "<p></p>";
+    
+    $crides = pg_query($con, "SELECT c.client FROM complete_ride c WHERE c.rideid = '$rideid'");
+	$cride = pg_fetch_assoc($crides);
+	$bids = pg_query($con, "SELECT client, bid_price FROM bid  WHERE rideid = '$rideid' ORDER BY bid_price DESC");
+	if(pg_num_rows($bids)== 0){
+		exit;
+	}
+	?>
+	<div class="container">
+		<form action = "admin_acceptRide.php" method="POST">
+		  	<input type = "hidden" name = "rideid" value = <?php echo '"'.$row['rideid'].'"';?>>
+		  	  <?php
+		  	  if($cride){
+				  echo '
+				  <h4>Actual Client : '.$cride['client'].'</h4>
+				  <input type = "hidden" name = "client" value = "'.$cride['client'].'">
+				 <input type = "hidden" name = "remove" value ="true">
+				  <button type="submit" class="btn btn-warning">Cancel Completion</button>';
+			  }else{
+				  echo '<input type = "hidden" name = "add" value ="true">
+				  <label for="client">Client :</label>
+				<select class="form-control" id="client" name="client">';
+				while($bid = pg_fetch_assoc($bids)){
+					echo'<option value="'.$bid['client'].'">'.$bid['client'].' : '.$bid['bid_price'].'$</option>';
+				}
+				echo '</select><button type="submit" class="btn btn-success">Accept Offer</button>';
+			  }
+		  	  ?>
+		</form>
+  </div>
 </body>
 </html>
