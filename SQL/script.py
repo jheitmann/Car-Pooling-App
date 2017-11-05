@@ -74,7 +74,7 @@ filename = table+".sql"
 f = open(filename, 'w')
 query = ""
 for i in range(25):
-	rideid = random.randint(0,49)
+	rideid = i
 	userid = random.randint(0,99)
 	query = query + "INSERT INTO "+table+" VALUES('user"+str(userid)+"@gmail.com', 4.00, "+str(rideid)+");\n"
 f.write(query)
