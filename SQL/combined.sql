@@ -1,4 +1,4 @@
-DROP VIEW ride_price;s
+DROP VIEW ride_price;
 DROP TABLE complete_ride;
 DROP TABLE bid;
 DROP TABLE ride;
