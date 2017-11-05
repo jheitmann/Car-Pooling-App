@@ -53,7 +53,7 @@
 				</div>
 				<div class="form-group">
 				  <label for="min">Minimum Price:</label>
-				  <input name = "min" type="number" class="form-control" id="min" value="0" step = "0.5" min = "0.5" required>
+				  <input name = "min" type="number" class="form-control" id="min" value="0.5" step = "0.5" min = "0.5" required>
 				</div>
 				<div class="form-group">
 				  <label for="datetime">Date & Time:</label>
