@@ -5,7 +5,7 @@ DROP TABLE car;
 DROP TABLE person;CREATE TABLE person (
 	email VARCHAR(64) PRIMARY KEY,
 	name VARCHAR(64) NOT NULL,
-	phone NUMERIC NOT NULL,	-- UNIQUE,
+	phone NUMERIC NOT NULL,	
 	creditcard VARCHAR(64),
 	password VARCHAR(64) NOT NULL,
 	is_admin BOOLEAN NOT NULL DEFAULT FALSE
@@ -33,21 +33,22 @@ CREATE TABLE bid(
 	client VARCHAR(64) REFERENCES person(email) ON UPDATE CASCADE ON DELETE CASCADE,
 	bid_price NUMERIC NOT NULL,
 	rideid NUMERIC REFERENCES ride(rideid) ON UPDATE CASCADE ON DELETE CASCADE,
-	-- carid VARCHAR(64),
-	-- time_stamp TIMESTAMP,
-	-- FOREIGN KEY(carid,time_stamp) REFERENCES ride(carid,time_stamp),
-	PRIMARY KEY(rideid,client)
+	PRIMARY KEY(rideid,client),
+	UNIQUE(rideid,bid_price)
 );
 
 CREATE TABLE complete_ride(
-	client VARCHAR(64) REFERENCES person(email) ON UPDATE CASCADE ON DELETE CASCADE,
-	final_price NUMERIC NOT NULL,
-	rideid NUMERIC REFERENCES ride(rideid) ON UPDATE CASCADE ON DELETE CASCADE,
-	PRIMARY KEY(rideid)
-	-- carid VARCHAR(64),
-	-- time_stamp TIMESTAMP,
-	-- FOREIGN KEY(carid,time_stamp) REFERENCES ride(carid,time_stamp),
+	rideid NUMERIC PRIMARY KEY,
+	client VARCHAR(64),
+	FOREIGN KEY(rideid,client) REFERENCES bid(rideid,client) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+CREATE VIEW ride_price AS 
+SELECT distinct r.price , r.carid, r.time_stamp, r.origin, r.destination, r.rideid, b.bid_price, 			b.client
+FROM ride r LEFT OUTER JOIN bid b
+ON (r.rideid = b.rideid 
+AND b.bid_price >= ALL(SELECT b2.bid_price FROM bid b2 WHERE b2.rideid = r.rideid)
+AND b.bid_price >= r.price);
 INSERT INTO person VALUES('user0@gmail.com', 'user0', 7088540646, '1234-43213-1231-12312', 'cb71cd3f59909532b783257f5f97d0502af258231f9d17cbe762799c0bb4a0f6', FALSE);
 INSERT INTO person VALUES('user1@gmail.com', 'user1', 8593938487, '1234-43213-1231-12312', 'e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349', FALSE);
 INSERT INTO person VALUES('user2@gmail.com', 'user2', 1298304114, '1234-43213-1231-12312', '1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9', FALSE);

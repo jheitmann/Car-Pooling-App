@@ -32,7 +32,7 @@ if (!$ride) {
 	exit;
 }
 
-$rideq =  pg_query($con , "Select * FROM complete_ride c,person p WHERE rideid = '".$_POST['rideid']."' AND c.client=p.email");
+$rideq =  pg_query($con , "Select * FROM complete_ride c, bid b, person p WHERE c.rideid = '".$_POST['rideid']."' AND c.client=p.email AND b.rideid = c.rideid AND b.client = c.client");
 if (!$rideq) {
 	echo "ERROR DATABASE";
 	exit;
@@ -101,12 +101,12 @@ $bestBid = pg_fetch_assoc($bids);
 			<h2 class='w3-text-grey w3-padding-16'><i class='fa fa-handshake-o fa-fw w3-margin-right w3-xxlarge w3-text-teal'></i>Status</h2>
 			<div class='w3-container'>";
 			if($canSee){
-				echo "<h3 class='w3-opacity'><b>Your offer was accepted by the driver for ".$complete['final_price']."$</b></h3>";
+				echo "<h3 class='w3-opacity'><b>Your offer was accepted by the driver for ".$complete['bid_price']."$</b></h3>";
 			}elseif($_SESSION['email'] == $ride['owner']){
 				echo "<h3 class='w3-opacity'><b>Your accepted the offer:</b></h3>";
 				echo '<div class="w3-white w3-text-grey w3-card-4">
           <div class="w3-container">
-          <p class="w3-large"><b><i class="fa fa-dollar fa-fw w3-margin-right w3-text-teal"></i>Price : '.$complete['final_price'].'$</b></p>
+          <p class="w3-large"><b><i class="fa fa-dollar fa-fw w3-margin-right w3-text-teal"></i>Price : '.$complete['bid_price'].'$</b></p>
           <hr>
           <p class="w3-large"><b><i class="fa fa-user fa-fw w3-margin-right w3-text-teal"></i>Client : '.$complete['name'].'</b></p>
           </div>
